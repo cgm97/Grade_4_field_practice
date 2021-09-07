@@ -9,4 +9,9 @@
 	  	 	FROM MEMBER 
    </select>
 
+   <!--멤버 추가 -->
+   <insert id="insertMember" parameterType="memberDTO">
+   			INSERT INTO MEMBER (NAME,AGE)
+				VALUES(#{name},#{age})
+   </insert>
 </mapper>

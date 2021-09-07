@@ -18,4 +18,9 @@ public class MemberMybatis implements MemberRepository{
 	public List<MemberDTO> getListMember() throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getListMember");
 	}
+
+	@Override
+	public int insertMember(MemberDTO dto) {
+		return sqlSession.insert(NAMESPACE+"insertMember", dto);
+	}
 }

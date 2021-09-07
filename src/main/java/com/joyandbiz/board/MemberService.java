@@ -14,4 +14,8 @@ public class MemberService {
 	public List<MemberDTO> getListMember() throws Exception {
 		return dao.getListMember();
 	}
+	
+	public int insertMember(MemberDTO dto) {
+		return dao.insertMember(dto);
+	}
 }
