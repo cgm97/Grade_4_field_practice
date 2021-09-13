@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.container{
+    width: 500px;
+    height: 700px;
+    position: absolute;
+    top: 41%;
+    left: 55%;
+    transform: translate(-45%, -40%);
+}
+.idDiv{
+	width:300px;
+	height:40px;
+	margin-top: 1px;
+}
+.pwDiv{
+	width:300px;
+	height:40px;
+	margin-top: 1px;
+}
+.bottom{
+	width:300px;
+	height:170px;
+	background-color: #EDEDED;
+}
+.item{
+	display: flex;
+	justify-content: center;
+	padding: 35px;
+}
+.button{
+	border:1x solid #0099FF;    /*---테두리 정의---*/
+	background-Color:#0099FF;   /*--백그라운드 정의---*/
+	color:#000000;    /*--폰트 색깔---*/
+	width:80; height:35;  /*--버튼 크기---*/
+}
+.button-cancel{
+	border:1x solid #BDBDBD;    /*---테두리 정의---*/
+	background-Color:#BDBDBD;   /*--백그라운드 정의---*/
+	color:#000000;    /*--폰트 색깔---*/
+	width:80; height:35;  /*--버튼 크기---*/
+}
