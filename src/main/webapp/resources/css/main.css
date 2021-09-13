@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+body{
+ width:70%;
+ margin: 0 auto;
+ padding: 130px;
+}
+.button{
+	border:1x solid #0099FF;    /*---테두리 정의---*/
+	background-Color:#0099FF;   /*--백그라운드 정의---*/
+	color:#000000;    /*--폰트 색깔---*/
+	width:60; height:25;  /*--버튼 크기---*/
+}
+table {
+   width: 100%;
+   border: 1px solid #444444;
+   border-collapse: collapse;
+      }
+ th, td {
+    border: 1px solid #444444;
+    padding: 10px;
+  }
+
+.title{
+	margin: 0 0 50px 0;
+	
+}
+.top{
+  float:right;
+  height: 25px;
+  margin: 0 0 10px 0;	
+}
+.bottom{
+	text-align: center; 
+	height: 25px;
+	margin: 10px 0 0 0;
+}	
+.pagingBtn{
+	display: inline-block;
+	text-align: center; 
+}
+.writeBtn{
+	float:right;
+	display: inline-block;
+	text-align: right;
+}
