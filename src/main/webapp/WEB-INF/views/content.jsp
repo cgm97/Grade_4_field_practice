@@ -5,15 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세보기</title>
+<title>게시물 상세보기</title>
 	 <link href="<c:url value="/css/content.css" />" rel='stylesheet' />
 </head>
 <body>
-	<article>
 		<div class="container">
 			<h2>게시물 상세보기</h2>
 			<div>
-				<div class="board_title"><span style="font:20px bold;">잘가 - 권진아</span></div>
+				<div class="board_title"><span style="font:25px bold;">잘가 - 권진아</span></div>
 				<div class="board_content">
 					어서 가<br>
 					밤이 깊었으니까<br>
@@ -49,6 +48,5 @@
 				<input type="button" value=">>"/>
 			</div>
 		</div>
-	</article>
 </body>
 </html>

@@ -22,22 +22,32 @@ public class HomeController {
 		return "home";
 	}
 	
-	@PostMapping("/searchMember")
-	public String db_test(Model model) throws Exception {
-		model.addAttribute("member", memberService.getListMember());
-		 
-		return "memberList";
+	@GetMapping("/content")
+	public String content() {
+		return "content";
 	}
 	
-	@PostMapping("/addMember.do")
-	public String insertMember(Model model, MemberDTO dto) throws Exception {
-		memberService.insertMember(dto);
-		return "home";
+	@GetMapping("/editContent")
+	public String editContent() {
+		return "editContent";
 	}
 	
-	@GetMapping("/addMember")
-	public String st(Model model) throws Exception {
-		
-		return "addMember";
+	@GetMapping("/identification")
+	public String identification() {
+		return "identification";
 	}
+	/*
+	 * @PostMapping("/searchMember") public String db_test(Model model) throws
+	 * Exception { model.addAttribute("member", memberService.getListMember());
+	 * 
+	 * return "memberList"; }
+	 * 
+	 * @PostMapping("/addMember.do") public String insertMember(Model model,
+	 * MemberDTO dto) throws Exception { memberService.insertMember(dto); return
+	 * "home"; }
+	 * 
+	 * @GetMapping("/addMember") public String st(Model model) throws Exception {
+	 * 
+	 * return "addMember"; }
+	 */
 }

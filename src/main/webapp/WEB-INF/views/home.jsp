@@ -2,8 +2,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <html>
 <head>
-	<title>DB Test</title>
-	 <link href="<c:url value="/css/main.css" />" rel='stylesheet' />
+	<title>업무 관리 게시판</title>
+	<link href="<c:url value="/css/main.css" />" rel='stylesheet' />
 </head>
 <body>
 <!--  
@@ -38,7 +38,7 @@
 	      			<col style="width:5%;" />
 	      		</colgroup>
 	      		<thead>
-	          		<tr  bgcolor="grey">
+	          		<tr bgcolor="#EDEDED">
 	              		<th>No.</th>
 	                    <th>제목</th>
 	                    <th>작성자</th>
