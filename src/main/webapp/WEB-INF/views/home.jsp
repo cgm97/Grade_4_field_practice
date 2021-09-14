@@ -4,6 +4,7 @@
 <head>
 	<title>업무 관리 게시판</title>
 	<link href="<c:url value="/css/main.css" />" rel='stylesheet' />
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
 <!--  
@@ -25,7 +26,7 @@
 	    		<option>작성자</option>
 	    	</select>
 	  		<input type="text" placeholder="검색어 입력" />
-	  		<input type="button" class="button" value="검색" />
+	  		<input type="button" class="fas fa-search fa-lg"  />
 	    </div>
 	    
 	    <div>
@@ -49,7 +50,7 @@
 	          	<tbody>
 	          		<tr>
 	              		<td>No.</td>
-	                    <td>제목</td>
+	                    <td><a href="content">잘가-권진아</a></td>
 	                    <td>작성자</td>
 	                  	<td>등록일</td>
 	                 	<td>조회수</td>
@@ -74,8 +75,8 @@
    </div>
    
     <div class='bottom'>
-      <div class="pagingBtn">페이지 이동</div>
-      <div class="writeBtn"><input type="button" class="button" value="글쓰기" /></div>
+      <div class="pagingBtn">1 2 3 4 5</div>
+      <div class="writeBtn"><input class="button" type="button" onClick="location.href='editContent?key=1'" value="글쓰기" /></div>
     </div>
     
 </body>

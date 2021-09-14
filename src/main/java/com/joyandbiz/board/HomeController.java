@@ -16,7 +16,7 @@ public class HomeController {
 	@Autowired
 	private MemberService memberService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping("/")
 	public String home( Model model) {
 		
 		return "home";
@@ -28,12 +28,16 @@ public class HomeController {
 	}
 	
 	@GetMapping("/editContent")
-	public String editContent() {
+	public String editContent(Model model, int key) {
+		model.addAttribute("key", key);
+		
 		return "editContent";
 	}
 	
 	@GetMapping("/identification")
-	public String identification() {
+	public String identification(Model model, int key) {
+		model.addAttribute("key", key);
+		
 		return "identification";
 	}
 	/*

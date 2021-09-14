@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시물 상세보기</title>
-	 <link href="<c:url value="/css/content.css" />" rel='stylesheet' />
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<link href="<c:url value="/css/content.css" />" rel='stylesheet' />
 </head>
 <body>
 		<div class="container">
@@ -42,10 +43,10 @@
 			</div>
 
 			<div class="bottom">
-				<input type="button" value="<<"/>
-				<input type="button" class="button"  value="수정"/>
-				<input type="button" class="button-delete"  value="삭제"/>
-				<input type="button" value=">>"/>
+				<input class="fas fa-angle-double-left" type="button"/>
+				<input type="button" class="button"  onclick="location.href='identification?key=2'" value="수정" />
+				<input class="button-delete" type="button" onclick="location.href='identification?key=3'" value="삭제" />
+				<input class="fas fa-angle-double-right" type="button" />
 			</div>
 		</div>
 </body>
