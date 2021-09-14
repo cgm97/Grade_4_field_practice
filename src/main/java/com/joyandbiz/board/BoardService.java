@@ -14,5 +14,9 @@ public class BoardService {
 	public List<BoardDTO> getBoardList(){
 		return dao.getBoardList();
 	}
+
+	public BoardDTO getContentByCon_No(String con_no) {
+		return dao.getContentByCon_No(con_no);
+	}
 	
 }

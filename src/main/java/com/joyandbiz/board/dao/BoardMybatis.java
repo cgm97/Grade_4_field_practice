@@ -18,4 +18,9 @@ public class BoardMybatis implements BoardRepository{
 	public List<BoardDTO> getBoardList() {
 		return sqlSession.selectList(NAMESPACE+"getBoardList");
 	}
+
+	@Override
+	public BoardDTO getContentByCon_No(String con_no) {
+		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", con_no);
+	}
 }

@@ -51,33 +51,12 @@
 	          	<c:forEach var="boardList" items="${getBoardList}">
 	          		<tr>
 	              		<td>${boardList.getCon_no()}</td>
-	                    <td>${boardList.getCon_title()}</td>
+	                    <td><a href="content?con_no=${boardList.getCon_no()}">${boardList.getCon_title()}</a></td>
 	                    <td>${boardList.getCon_id()}</td>
 	                  	<td>${boardList.getReg_date()}</td>
 	                 	<td>${boardList.getRead_count()}</td>
 	              	</tr>
 	          	</c:forEach>
-	          		<tr>
-	              		<td>No.</td>
-	                    <td><a href="content">잘가-권진아</a></td>
-	                    <td>작성자</td>
-	                  	<td>등록일</td>
-	                 	<td>조회수</td>
-	              	</tr>
-	             	<tr>
-	              		<td>No.</td>
-	                    <td>제목</td>
-	                    <td>작성자</td>
-	                  	<td>등록일</td>
-	                 	<td>조회수</td>
-	              	</tr>
-	              	<tr>
-	              		<td>No.</td>
-	                    <td>제목</td>
-	                    <td>작성자</td>
-	                  	<td>등록일</td>
-	                 	<td>조회수</td>
-	              	</tr>
 	            </tbody>
 	      	</table>
 	    </div>

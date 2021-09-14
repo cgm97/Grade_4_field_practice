@@ -21,4 +21,11 @@
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
 	  	 	FROM CONTENTS_DATA 
    </select>
+   
+    <!-- 게시물 상세보기 -->
+    <select id="getContentByCon_No" parameterType="String" resultType="boardDTO">
+	  	 SELECT CON_NO, CON_TITLE, CON_TXT	 		
+	  	 	FROM CONTENTS_DATA 
+	  	 		WHERE CON_NO = #{CON_NO}
+   </select>
 </mapper>

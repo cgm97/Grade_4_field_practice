@@ -4,11 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.joyandbiz.board.domain.BoardDTO;
 
 @Controller
 public class HomeController {
@@ -24,7 +19,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("/content")
-	public String content() {
+	public String content(Model model, String con_no) {
+		model.addAttribute("content", boardService.getContentByCon_No(con_no));
+		
 		return "content";
 	}
 	
