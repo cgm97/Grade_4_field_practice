@@ -16,6 +16,9 @@ public class BoardService {
 	}
 
 	public BoardDTO getContentByCon_No(String con_no) {
+		// 게시물 조회수 카운팅
+		dao.plusReadCount(con_no);
+		
 		return dao.getContentByCon_No(con_no);
 	}
 	

@@ -23,4 +23,9 @@ public class BoardMybatis implements BoardRepository{
 	public BoardDTO getContentByCon_No(String con_no) {
 		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", con_no);
 	}
+
+	@Override
+	public int plusReadCount(String con_no) {
+		return sqlSession.update(NAMESPACE+"plusReadCount", con_no);	
+	}
 }
