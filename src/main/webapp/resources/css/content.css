@@ -6,9 +6,14 @@ body{
  padding: 130px;
 }
 .title{
+	width:70%;
+	display: flex;	
 	margin: 0 0 50px 0;
 }
 
+.back{
+	margin-right: 15px;
+}
 .middle{
 	
 }

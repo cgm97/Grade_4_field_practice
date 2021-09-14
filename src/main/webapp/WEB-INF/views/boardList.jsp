@@ -50,11 +50,11 @@
 	          	<tbody>
 	          	<c:forEach var="boardList" items="${getBoardList}">
 	          		<tr>
-	              		<td>${boardList.getCon_no()}</td>
+	              		<td style="text-align: center;">${boardList.getCon_no()}</td>
 	                    <td><a href="content?con_no=${boardList.getCon_no()}">${boardList.getCon_title()}</a></td>
-	                    <td>${boardList.getCon_id()}</td>
-	                  	<td>${boardList.getReg_date()}</td>
-	                 	<td>${boardList.getRead_count()}</td>
+	                    <td style="text-align: center;">${boardList.getCon_id()}</td>
+	                  	<td style="text-align: center;">${boardList.getReg_date()}</td>
+	                 	<td style="text-align: center;">${boardList.getRead_count()}</td>
 	              	</tr>
 	          	</c:forEach>
 	            </tbody>

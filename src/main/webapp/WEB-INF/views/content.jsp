@@ -11,8 +11,12 @@
 </head>
 <body>	
 	<div class="title">
-		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
-		<label style="font:45px bold;">게시물 상세보기</label>
+		<div class="back">
+			<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>		
+		</div>
+		<div>
+			<label style="font:45px bold;">게시물 상세보기</label>		
+		</div>
 	</div>
 		<div class="container">
 			<div class="middle">

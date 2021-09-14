@@ -12,13 +12,18 @@
 <body>
 	<form action="" method="POST">
 	  	<div class="title">
-	  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
-		  	<c:if test="${key eq 1}">
-		  		<label style="font:45px bold;">게시물 작성</label>
-		  	</c:if>
-		  	<c:if test="${key eq 2}">
-		  		<label style="font:45px bold;">게시물 수정</label>
-		  	</c:if>
+		  	<div class="back">
+		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
+		  	</div>
+		  	<div>
+			  	<c:if test="${key eq 1}">
+			  		<label style="font:45px bold;">게시물 작성</label>
+			  	</c:if>
+			  	<c:if test="${key eq 2}">
+			  		<label style="font:45px bold;">게시물 수정</label>
+			  	</c:if>
+		  	</div>
+		  	
 	 	</div>
 		<div class="container">		 	
 		  	<div class="middle">

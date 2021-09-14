@@ -19,7 +19,7 @@
    <select id="getBoardList" resultType="boardDTO">
 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
-	  	 	FROM CONTENTS_DATA ORDER BY ABS(CON_NO)
+	  	 	FROM CONTENTS_DATA ORDER BY ABS(CON_NO) DESC
    </select>
     <!-- 게시물 상세보기 -->
     <select id="getContentByCon_No" parameterType="String" resultType="boardDTO">
