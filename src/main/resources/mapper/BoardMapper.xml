@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+   <!-- 이름 겸색 테스트 -->
+<!--    <select id="getListMember" resultType="memberDTO">
+	  	 SELECT * 
+	  	 	FROM MEMBER 
+   </select>
+
+   멤버 추가
+   <insert id="insertMember" parameterType="memberDTO">
+   			INSERT INTO MEMBER (NAME,AGE)
+				VALUES(#{name},#{age})
+   </insert> -->
+   
+   <!-- 게시판 목록 조회 -->
+   <select id="getBoardList" resultType="boardDTO">
+	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
+	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
+	  	 	FROM CONTENTS_DATA 
+   </select>
+</mapper>

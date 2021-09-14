@@ -33,8 +33,8 @@
 	      	<table>
 	      		<colgroup>
 	      			<col style="width:5%;" />
-	      			<col style="width:55%;" />
-	      			<col style="width:5%;" />
+	      			<col style="width:52%;" />
+	      			<col style="width:8%;" />
 	      			<col style="width:5%;" />
 	      			<col style="width:5%;" />
 	      		</colgroup>
@@ -48,6 +48,15 @@
 	              	</tr>
 	        	</thead>
 	          	<tbody>
+	          	<c:forEach var="boardList" items="${getBoardList}">
+	          		<tr>
+	              		<td>${boardList.getCon_no()}</td>
+	                    <td>${boardList.getCon_title()}</td>
+	                    <td>${boardList.getCon_id()}</td>
+	                  	<td>${boardList.getReg_date()}</td>
+	                 	<td>${boardList.getRead_count()}</td>
+	              	</tr>
+	          	</c:forEach>
 	          		<tr>
 	              		<td>No.</td>
 	                    <td><a href="content">잘가-권진아</a></td>

@@ -5,10 +5,10 @@
   
 <configuration>
 	<typeAliases>
-		<typeAlias alias="memberDTO" type="com.joyandbiz.board.domain.MemberDTO"/>
+		<typeAlias alias="BoardDTO" type="com.joyandbiz.board.domain.BoardDTO"/>
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mapper/MemberMapper.xml"/>
+		<mapper resource="mapper/BoardMapper.xml"/>
 	</mappers>
 </configuration>

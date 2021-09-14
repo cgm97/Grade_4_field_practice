@@ -8,16 +8,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.joyandbiz.board.domain.MemberDTO;
+import com.joyandbiz.board.domain.BoardDTO;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	private MemberService memberService;
+	private BoardService boardService;
 
 	@GetMapping("/")
-	public String home( Model model) {
+	public String home(Model model) {
+		model.addAttribute("getBoardList", boardService.getBoardList());
 		
 		return "home";
 	}
@@ -40,18 +41,4 @@ public class HomeController {
 		
 		return "identification";
 	}
-	/*
-	 * @PostMapping("/searchMember") public String db_test(Model model) throws
-	 * Exception { model.addAttribute("member", memberService.getListMember());
-	 * 
-	 * return "memberList"; }
-	 * 
-	 * @PostMapping("/addMember.do") public String insertMember(Model model,
-	 * MemberDTO dto) throws Exception { memberService.insertMember(dto); return
-	 * "home"; }
-	 * 
-	 * @GetMapping("/addMember") public String st(Model model) throws Exception {
-	 * 
-	 * return "addMember"; }
-	 */
 }
