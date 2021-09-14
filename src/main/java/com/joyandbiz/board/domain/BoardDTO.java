@@ -1,7 +1,5 @@
 package com.joyandbiz.board.domain;
 
-import java.util.Date;
-
 public class BoardDTO {
 	private String con_div;
 	private String con_no;

@@ -1,22 +1,25 @@
 @charset "UTF-8";
 
-.container{
-    width: 500px;
-    height: 700px;
-    position: absolute;
-    top: 41%;
-    left: 50%;
-    transform: translate(-45%, -40%);
+body{
+ width:70%;
+ margin: 0 auto;
+ padding: 130px;
 }
+
+.title{
+	margin: 0 0 50px 0;
+}
+
 .middle{
 	text-align: center;
 }
 .bottom{
+	width:360px;
 	float: right;
 	margin: 5px 0 0 0;
 }
 table {
-   width: 100%;
+   width: 70%;
    border: 1px solid #444444;
    border-collapse: collapse;
 }
@@ -24,6 +27,7 @@ th, td {
     border: 1px solid #444444;
     padding: 10px;
 }
+
 .button{
 	border:1x solid #0099FF;    /*---테두리 정의---*/
 	background-Color:#0099FF;   /*--백그라운드 정의---*/

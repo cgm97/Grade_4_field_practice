@@ -1,26 +1,37 @@
 @charset "UTF-8";
 
-.container{
-    width: 500px;
-    height: 700px;
-    position: absolute;
-    top: 50%;
-    left: 55%;
-    transform: translate(-45%, -50%);
+body{
+ width:70%;
+ margin: 0 auto;
+ padding: 130px;
 }
+.title{
+	margin: 0 0 50px 0;
+}
+
+.middle{
+	
+}
+
 .bottom{
-	width: 300px;
+	width: 700px;
 	margin-top : 20px;
+	margin-left : 15px;
 	display:flex;
 	justify-content: space-around;
 }
-.board_title{
-	width: 300px;
-	height: 50px;
-	}
-.board_content{
-	width: 300px;
+
+table {
+   width: 70%;
+   border: 1px solid #444444;
+   border-collapse: collapse;
 }
+
+th, td {
+    border: 1px solid #444444;
+    padding: 10px;
+}
+
 .button{
 	border:1x solid #0099FF;    /*---테두리 정의---*/
 	background-Color:#0099FF;   /*--백그라운드 정의---*/

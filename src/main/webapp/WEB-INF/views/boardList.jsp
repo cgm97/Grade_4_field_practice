@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>업무 관리 게시판</title>
-	<link href="<c:url value="/css/main.css" />" rel='stylesheet' />
+	<link href="<c:url value="/css/boardList.css" />" rel='stylesheet' />
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	<button type="button" onclick="location.href='addMember'">멤버 추가</button>
 -->
 	<div class="title">
-		<label style="font:40px bold;">공지사항</label>
+		<label style="font:45px bold;">공지사항</label>
 	</div>
 	<div class="container">
 	    <div class="top">

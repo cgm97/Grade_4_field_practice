@@ -9,15 +9,28 @@
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<link href="<c:url value="/css/content.css" />" rel='stylesheet' />
 </head>
-<body>
+<body>	
+	<div class="title">
+		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
+		<label style="font:45px bold;">게시물 상세보기</label>
+	</div>
 		<div class="container">
-			<h2>게시물 상세보기</h2>
-			<div>
-				<div class="board_title"><span style="font:25px bold;">${content.getCon_title()}</span></div>
-				<div class="board_content">
-					${content.getCon_txt()}
-				</div>
-			</div>
+			<div class="middle">
+		    	<table>
+		    		<colgroup>
+		    			<col style="width:10%;" />
+	      				<col style="width:80%;" />
+		    		</colgroup>
+			          <tr>
+			          	<td bgcolor="#EDEDED">제목</td>
+			          	<td colspan="3"><span style="font:20px bold;">${content.getCon_title()}</span></td>
+			          </tr>
+			          <tr>
+			          	<td style= "height: 200px;" bgcolor="#EDEDED">내용</td>
+			          	<td colspan="3">${content.getCon_txt()}</td>
+			          </tr>
+	    		</table>  
+		    </div>
 
 			<div class="bottom">
 				<input class="fas fa-angle-double-left" type="button"/>
