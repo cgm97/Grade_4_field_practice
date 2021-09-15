@@ -19,7 +19,7 @@ body{
 }
 
 .bottom{
-	width: 700px;
+	width: 100%;
 	margin-top : 20px;
 	margin-left : 15px;
 	display:flex;
@@ -27,7 +27,7 @@ body{
 }
 
 table {
-   width: 70%;
+   width: 100%;
    border: 1px solid #444444;
    border-collapse: collapse;
 }

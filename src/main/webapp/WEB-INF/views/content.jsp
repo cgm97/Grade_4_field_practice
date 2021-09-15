@@ -9,6 +9,15 @@
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 	<link href="<c:url value="/css/content.css" />" rel='stylesheet' />
 </head>
+<script>
+function identification(key){ 
+	var url = "/board/identification.do?key="+ key;
+	var name = "수정 본인 확인";
+	var option = "width = 600, height = 600 left = 100, top=50,location=no";
+	window.open(url,name,option)
+
+};
+</script>
 <body>	
 	<div class="title">
 		<div class="back">
@@ -38,8 +47,8 @@
 
 			<div class="bottom">
 				<input class="fas fa-angle-double-left" type="button"/>
-				<input type="button" class="button"  onclick="location.href='identification?key=2'" value="수정" />
-				<input class="button-delete" type="button" onclick="location.href='identification?key=3'" value="삭제" />
+				<input type="button" class="button"  onclick="identification(2)" value="수정" />
+				<input class="button-delete" type="button" onclick="identification(3)" value="삭제" />
 				<input class="fas fa-angle-double-right" type="button" />
 			</div>
 		</div>

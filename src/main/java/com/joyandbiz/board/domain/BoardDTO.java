@@ -79,4 +79,11 @@ public class BoardDTO {
 	public void setUpd_date(String upd_date) {
 		this.upd_date = upd_date;
 	}
+	
+	@Override
+	public String toString() {
+		return "BoardDTO [con_div=" + con_div + ", con_no=" + con_no + ", con_title=" + con_title + ", con_txt="
+				+ con_txt + ", con_id=" + con_id + ", password=" + password + ", read_count=" + read_count + ", del_yn="
+				+ del_yn + ", reg_ip=" + reg_ip + ", reg_date=" + reg_date + ", upd_date=" + upd_date + "]";
+	}
 }
