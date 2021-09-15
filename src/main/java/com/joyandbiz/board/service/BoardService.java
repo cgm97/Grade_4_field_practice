@@ -8,4 +8,6 @@ public interface BoardService {
 	public List<BoardDTO> getBoardList();
 	
 	public BoardDTO getContentByCon_No(String con_no);
+
+	public int writeBoard(BoardDTO board);
 }

@@ -22,9 +22,13 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardDTO getContentByCon_No(String con_no) {
 		// 게시물 조회수 카운팅
-		dao.plusReadCount(con_no);
-		
+		dao.plusReadCount(con_no);	
 		return dao.getContentByCon_No(con_no);
+	}
+
+	@Override
+	public int writeBoard(BoardDTO board) {
+		return dao.insertBoard(board);
 	}
 
 }

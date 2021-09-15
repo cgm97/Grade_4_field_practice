@@ -29,4 +29,9 @@ public class BoardMybatis implements BoardRepository{
 	public int plusReadCount(String con_no) {
 		return sqlSession.update(NAMESPACE+"plusReadCount", con_no);	
 	}
+
+	@Override
+	public int insertBoard(BoardDTO board) {
+		return sqlSession.insert(NAMESPACE+"insertBoard", board);
+	}
 }

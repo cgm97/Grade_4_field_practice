@@ -1,11 +1,14 @@
 package com.joyandbiz.board;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.service.BoardService;
 
 @Controller
@@ -18,7 +21,7 @@ public class BoardController {
 	public ModelAndView root() {
 		ModelAndView mv = new ModelAndView(); 
 		mv.setViewName("redirect:/list.do");
-
+		
 		return mv;
 	}
 	
@@ -31,8 +34,22 @@ public class BoardController {
 		return mv;
 	}
 	
+	@PostMapping("/write.do")
+	public ModelAndView write(HttpServletRequest request, BoardDTO board) {
+		IPConfig ip = new IPConfig();
+		ModelAndView mv = new ModelAndView();
+
+		String yourIP = ip.getIPConfig(request);
+		board.setReg_ip(yourIP);
+		
+		mv.setViewName("redirect:/list.do");
+		boardService.writeBoard(board);
+		
+		return mv;
+	}
+	
 	@GetMapping("/content")
-	public ModelAndView content(Model model, String con_no) {
+	public ModelAndView content(String con_no) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("content");
 		mv.addObject("content", boardService.getContentByCon_No(con_no));
@@ -41,7 +58,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/editContent")
-	public ModelAndView editContent(Model model, int key) {
+	public ModelAndView editContent(int key) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("editContent");
 		mv.addObject("key", key);
@@ -49,8 +66,8 @@ public class BoardController {
 		return mv;
 	}
 	
-	@GetMapping("/identification")
-	public ModelAndView identification(Model model, int key) {
+	@GetMapping("/identification.do")
+	public ModelAndView identification(int key) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("identification");
 		mv.addObject("key", key);

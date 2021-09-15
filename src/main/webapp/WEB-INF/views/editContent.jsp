@@ -10,7 +10,8 @@
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-	<form action="" method="POST">
+	<form action=<c:if test="${key eq 1}">"<c:url value="/write.do" />"</c:if> 
+				 <c:if test="${key eq 2}">"<c:url value="/edit.do" />"</c:if> method="POST">
 	  	<div class="title">
 		  	<div class="back">
 		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
@@ -30,25 +31,25 @@
 		    	<table>
 			          <tr>
 			          	<td bgcolor="#EDEDED">제목</td>
-			          	<td colspan="3"><input style="width: 550px" type="text" id="con_title" placeholder="제목 입력"></td>
+			          	<td colspan="3"><input style="width: 550px" type="text" name="con_title" placeholder="제목 입력"></td>
 			          </tr>
 			          <tr>
 			          	<td style= "height: 200px;" bgcolor="#EDEDED">내용</td>
-			          	<td colspan="3"><textarea rows="18" cols="75" style = "resize:none;"></textarea></td>
+			          	<td colspan="3"><textarea rows="18" cols="75" style = "resize:none;" name="con_txt"></textarea></td>
 			          </tr>
 			        <c:if test="${key eq 1}">
 			          <tr>
 			          	<td style= "width: 90px;" bgcolor="#EDEDED">ID</td>
-			          	<td><input type="text" placeholder="ID 입력" />
+			          	<td><input type="text" name="con_id" placeholder="ID 입력" />
 			          	<td style= "width: 80px;" bgcolor="#EDEDED">PW</td>
-			          	<td><input type="password" placeholder="PW 입력" />
+			          	<td><input type="password" name="password" placeholder="PW 입력" />
 			          </tr>
 			        </c:if>			          
 		    	</table>  
 		    </div>
 		    
 		    <div class="bottom">
-		    	<input class="button" type="submit" onClick="location.href='wrtie.do'" value="저장" />
+		    	<input class="button" type="submit" value="저장" />
 		    </div>
 		</div>
 	</form>
