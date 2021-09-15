@@ -10,9 +10,9 @@
 	<link href="<c:url value="/css/content.css" />" rel='stylesheet' />
 </head>
 <script>
-function identification(key){ 
-	var url = "/board/identification.do?key="+ key;
-	var name = "수정 본인 확인";
+function identification(key,con_no){ 
+	var url = "/board/identification.do?key="+ key +"&&con_no="+con_no;
+	var name = "본인 확인";
 	var option = "width = 600, height = 600 left = 100, top=50,location=no";
 	window.open(url,name,option)
 
@@ -46,10 +46,10 @@ function identification(key){
 		    </div>
 
 			<div class="bottom">
-				<input class="fas fa-angle-double-left" type="button"/>
-				<input type="button" class="button"  onclick="identification(2)" value="수정" />
-				<input class="button-delete" type="button" onclick="identification(3)" value="삭제" />
-				<input class="fas fa-angle-double-right" type="button" />
+				<input class="fas fa-angle-double-left" type="button" onClick="location.href='/board/content?con_no=${con_no-1}'" />
+				<input type="button" class="button"  onclick="identification(2, ${con_no})" value="수정" />
+				<input class="button-delete" type="button" onclick="identification(3, ${con_no})" value="삭제" />
+				<input class="fas fa-angle-double-right" type="button" onClick="location.href='/board/content?con_no=${con_no+1}'" />
 			</div>
 		</div>
 </body>
