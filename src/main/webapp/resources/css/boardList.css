@@ -44,3 +44,5 @@ table {
 	display: inline-block;
 	text-align: right;
 }
+a:link { color: blue; text-decoration: none;}
+a:hover { color: red; text-decoration: none;}

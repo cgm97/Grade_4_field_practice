@@ -10,8 +10,8 @@
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-	<form action=<c:if test="${key eq 1}">"<c:url value="/write.do" />"</c:if> 
-				 <c:if test="${key eq 2}">"<c:url value="/edit.do" />"</c:if> method="POST">
+	<form action=<c:if test="${key eq 1}">"<c:url value="/notice/write.do" />"</c:if> 
+				 <c:if test="${key eq 2}">"<c:url value="/notice/edit.do" />"</c:if> method="POST">
 	  	<div class="title">
 		  	<div class="back">
 		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>

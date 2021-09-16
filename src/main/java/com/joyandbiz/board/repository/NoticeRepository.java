@@ -4,11 +4,11 @@ import java.util.List;
 import com.joyandbiz.board.domain.BoardDTO;
 
 public interface NoticeRepository {
-	public List<BoardDTO> getBoardList();
+	public List<BoardDTO> getBoardList(BoardDTO board);
 
-	public BoardDTO getContentByCon_No(String con_no);
+	public BoardDTO getContentByCon_No(BoardDTO board);
 
-	public int plusReadCount(String con_no);
+	public int plusReadCount(BoardDTO board);
 
 	public int insertBoard(BoardDTO board);
 }

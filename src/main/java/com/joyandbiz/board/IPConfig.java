@@ -1,7 +1,12 @@
 package com.joyandbiz.board;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class IPConfig {
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public String getIPConfig(HttpServletRequest request) {
 		String ip = request.getHeader("X-FORWARDED-FOR");
@@ -21,6 +26,8 @@ public class IPConfig {
 		if (ip == null) {
 			ip = request.getRemoteAddr();
 		}
+		
+		logger.info("Á¢¼ÓµÈ IP : " + ip);
 		return ip;
 	}
 }

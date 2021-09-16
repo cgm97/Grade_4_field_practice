@@ -16,24 +16,24 @@
    </insert> -->
    
    <!-- 게시판 목록 조회 -->
-   <select id="getBoardList" resultType="boardDTO">
+   <select id="getBoardList"  parameterType="boardDTO" resultType="boardDTO">
 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
-	  	 	FROM CONTENTS_DATA WHERE DEL_YN='N' ORDER BY ABS(CON_NO) DESC
+	  	 	FROM CONTENTS_DATA WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(con_no) DESC
    </select>
     <!-- 게시물 상세보기 -->
-    <select id="getContentByCon_No" parameterType="String" resultType="boardDTO">
+    <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
 	  	 SELECT CON_NO, CON_TITLE, CON_TXT	 		
 	  	 	FROM CONTENTS_DATA 
-	  	 		WHERE CON_NO = #{CON_NO}
+	  	 		WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}
    </select>
    <!-- 조회수 카운팅 -->
-   <update id="plusReadCount" parameterType="String">
+   <update id="plusReadCount" parameterType="boardDTO">
     	UPDATE CONTENTS_DATA SET READ_COUNT = READ_COUNT+1 WHERE CON_NO = #{con_no}
    </update>
    <!-- 글쓰기 -->
    <insert id="insertBoard" parameterType="boardDTO">
    		INSERT INTO CONTENTS_DATA (CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, REG_IP) 
-   			 VALUES ('1', (SELECT NVL(MAX(ABS(CON_NO))+1,1) from CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
+   			 VALUES (#{con_div}, (SELECT NVL(MAX(ABS(CON_NO))+1,1) from CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
    </insert>
 </mapper>

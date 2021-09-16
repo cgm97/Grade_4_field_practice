@@ -2,6 +2,8 @@ package com.joyandbiz.board.repository.dao;
 
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,20 +16,22 @@ public class NoticeMybatis implements NoticeRepository{
 	@Autowired
 	private SqlSession sqlSession;
 	private static final String NAMESPACE = "noticeMapper.";
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<BoardDTO> getBoardList() {
-		return sqlSession.selectList(NAMESPACE+"getBoardList");
+	public List<BoardDTO> getBoardList(BoardDTO board) {
+		return sqlSession.selectList(NAMESPACE+"getBoardList", board);
 	}
 
 	@Override
-	public BoardDTO getContentByCon_No(String con_no) {
-		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", con_no);
+	public BoardDTO getContentByCon_No(BoardDTO board) {
+		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", board);
 	}
 
 	@Override
-	public int plusReadCount(String con_no) {
-		return sqlSession.update(NAMESPACE+"plusReadCount", con_no);	
+	public int plusReadCount(BoardDTO board) {
+		logger.info(">>> 게시판 조회수 카운팅");
+		return sqlSession.update(NAMESPACE+"plusReadCount", board);	
 	}
 
 	@Override
