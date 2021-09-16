@@ -12,4 +12,6 @@ public interface NoticeService {
 	public BoardDTO getContentByCon_No(BoardDTO board);
 
 	public int writeBoard(HttpServletRequest request, BoardDTO board);
+
+	public boolean checkIdentify(BoardDTO board);
 }

@@ -10,17 +10,17 @@
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-	<form action=<c:if test="${key eq 1}">"<c:url value="/notice/write.do" />"</c:if> 
-				 <c:if test="${key eq 2}">"<c:url value="/notice/edit.do" />"</c:if> method="POST">
+	<form action=<c:if test="${boardInfo.getKey() eq 1}">"<c:url value="/notice/write.do" />"</c:if> 
+				 <c:if test="${boardInfo.getKey() eq 2}">"<c:url value="/notice/edit.do" />"</c:if> method="POST">
 	  	<div class="title">
 		  	<div class="back">
 		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
 		  	</div>
 		  	<div>
-			  	<c:if test="${key eq 1}">
+			  	<c:if test="${boardInfo.getKey() eq 1}">
 			  		<label style="font:45px bold;">게시물 작성</label>
 			  	</c:if>
-			  	<c:if test="${key eq 2}">
+			  	<c:if test="${boardInfo.getKey() eq 2}">
 			  		<label style="font:45px bold;">게시물 수정</label>
 			  	</c:if>
 		  	</div>
@@ -31,13 +31,13 @@
 		    	<table>
 			          <tr>
 			          	<td bgcolor="#EDEDED">제목</td>
-			          	<td colspan="3"><input style="width: 550px" type="text" name="con_title" placeholder="제목 입력"></td>
+			          	<td colspan="3"><input style="width: 550px" type="text" name="con_title" placeholder="제목 입력" value="${boardInfo.getCon_title()}"></td>
 			          </tr>
 			          <tr>
 			          	<td style= "height: 200px;" bgcolor="#EDEDED">내용</td>
-			          	<td colspan="3"><textarea rows="18" cols="75" style = "resize:none;" name="con_txt"></textarea></td>
+			          	<td colspan="3"><textarea rows="18" cols="75" style = "resize:none;" name="con_txt">${boardInfo.getCon_txt()}</textarea></td>
 			          </tr>
-			        <c:if test="${key eq 1}">
+			        <c:if test="${boardInfo.getKey() eq 1}">
 			          <tr>
 			          	<td style= "width: 90px;" bgcolor="#EDEDED">ID</td>
 			          	<td><input type="text" name="con_id" placeholder="ID 입력" />

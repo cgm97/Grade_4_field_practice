@@ -38,4 +38,9 @@ public class NoticeMybatis implements NoticeRepository{
 	public int insertBoard(BoardDTO board) {
 		return sqlSession.insert(NAMESPACE+"insertBoard", board);
 	}
+
+	@Override
+	public boolean isCheckIdentify(BoardDTO board) {
+		return sqlSession.selectOne(NAMESPACE+"isCheckIdentify", board);
+	}
 }

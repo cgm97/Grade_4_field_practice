@@ -19,7 +19,8 @@
    <select id="getBoardList"  parameterType="boardDTO" resultType="boardDTO">
 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
-	  	 	FROM CONTENTS_DATA WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(con_no) DESC
+	  	 	FROM CONTENTS_DATA 
+	  	 		WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(con_no) DESC
    </select>
     <!-- 게시물 상세보기 -->
     <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
@@ -29,11 +30,20 @@
    </select>
    <!-- 조회수 카운팅 -->
    <update id="plusReadCount" parameterType="boardDTO">
-    	UPDATE CONTENTS_DATA SET READ_COUNT = READ_COUNT+1 WHERE CON_NO = #{con_no}
+    	UPDATE CONTENTS_DATA 
+    		SET READ_COUNT = READ_COUNT+1 
+    			WHERE CON_NO = #{con_no}
    </update>
    <!-- 글쓰기 -->
    <insert id="insertBoard" parameterType="boardDTO">
    		INSERT INTO CONTENTS_DATA (CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, REG_IP) 
-   			 VALUES (#{con_div}, (SELECT NVL(MAX(ABS(CON_NO))+1,1) from CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
+   			 VALUES (#{con_div}, (SELECT NVL(MAX(ABS(CON_NO))+1,1) 
+   			 	FROM CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
    </insert>
+   <!-- 본인 인증 -->
+   <select id="isCheckIdentify" parameterType="boardDTO" resultType="boolean">
+   		SELECT CASE WHEN count(*)=1 THEN 1 ELSE 0 END
+   			FROM CONTENTS_DATA
+   				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} AND CON_ID = #{con_id} AND PASSWORD = #{password}
+   	</select>
 </mapper>
