@@ -85,7 +85,7 @@ public class NoticeController {
 	
 	// 본인 인증 처리 단계
 	@PostMapping("/checkIdentify.do")
-	public ModelAndView checkIdentify(BoardDTO board) { // key = 1 수정, 2 삭제
+	public ModelAndView checkIdentify(BoardDTO board) { // key = 2 수정, 3 삭제
 		
 		ModelAndView mv = new ModelAndView();
 		

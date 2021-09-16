@@ -17,7 +17,7 @@
 		console.log(flag);
 		
 		// 수정 본인인증 판단 후
-		if (flag == true && key == 1) {
+		if (flag == true && key == 2) {
 			alert("수정 본인 인증 성공")
 			window.opener.name = "editContent"; // 부모창의 이름 설정
 		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
@@ -30,13 +30,12 @@
 		    self.close();
 		}
 		// 삭제 본인인증 판단 후
-		else if (flag == true && key == 2) {
+		else if (flag == true && key == 3) {
 			alert("삭제 본인 인증 성공")
 			window.opener.name = "editContent"; // 부모창의 이름 설정
 		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
-		    document.identify.key.value = 2;
 		    document.identify.action = "/board/notice/delete.do";
-		    document.identify.method = "GET"
+		    document.identify.method = "POST"
 		    document.identify.submit();
 		    self.close();
 		}
@@ -50,7 +49,7 @@
 	var submit = function(con_no) {
 		
 		var form =  document.beforeIdentify;
-		form.key.value = 1;
+		form.key.value = 2;
 		form.submit();
 	};
 	// 삭제 본인인증
@@ -59,7 +58,7 @@
 		
 		if(choice){
 			var form =  document.beforeIdentify;
-			form.key.value = 2;
+			form.key.value = 3;
 			form.submit();
 		}
 		else {
