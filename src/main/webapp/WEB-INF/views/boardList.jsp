@@ -6,6 +6,28 @@
 	<link href="<c:url value="/css/boardList.css" />" rel='stylesheet' />
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
+<script>
+	var content = function(data){
+
+		var form = document.content;
+		form.con_no.value = data;
+		form.key.value = 0;
+
+	    form.action = "<c:url value='/notice/detailContent.do' />";
+	    form.method = "POST";
+	    form.submit();
+	};
+	var key = function(data){
+
+		var form = document.content;
+		form.con_no.value = null;
+		form.key.value = data;
+
+	    form.action = "<c:url value='/notice/editContent.do' />";
+	    form.method = "POST";
+	    form.submit();
+	};
+</script>
 <body>
 	<div class="title">
 		<label style="font:45px bold;">공지사항</label>
@@ -39,13 +61,13 @@
 	              	</tr>
 	        	</thead>
 	          	<tbody>
-	          	<c:forEach var="boardList" items="${getBoardList}">
+	          	<c:forEach var="boardList" items="${boardList}">
 	          		<tr>
-	              		<td style="text-align: center;">${boardList.getCon_no()}</td>
-	                    <td><a href="content?con_no=${boardList.getCon_no()}">${boardList.getCon_title()}</a></td>
-	                    <td style="text-align: center;">${boardList.getCon_id()}</td>
-	                  	<td style="text-align: center;">${boardList.getReg_date()}</td>
-	                 	<td style="text-align: center;">${boardList.getRead_count()}</td>
+	              		<td style="text-align: center;"><c:out value="${boardList.getCon_no()}" /></td>
+	                    <td><a href="javascript:content(${boardList.getCon_no()});"><c:out value="${boardList.getCon_title()}" /></a></td>
+	                    <td style="text-align: center;"><c:out value="${boardList.getCon_id()}" /></td>
+	                  	<td style="text-align: center;"><c:out value="${boardList.getReg_date()}" /></td>
+	                 	<td style="text-align: center;"><c:out value="${boardList.getRead_count()}"/></td>
 	              	</tr>
 	          	</c:forEach>
 	            </tbody>
@@ -55,8 +77,11 @@
    
     <div class='bottom'>
       <div class="pagingBtn">1 2 3 4 5</div>
-      <div class="writeBtn"><input class="button" type="button" onClick="location.href='editContent?key=1'" value="글쓰기" /></div>
+      <div class="writeBtn"><input class="button" type="button" onclick="key(1);" value="글쓰기" /></div>
     </div>
-    
+    <form name="content">
+    	<input type="hidden" name="con_no"/>
+    	<input type="hidden" name="key"/>
+    </form>
 </body>
 </html>

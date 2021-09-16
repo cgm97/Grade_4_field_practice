@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.joyandbiz.board.domain.BoardDTO;
-import com.joyandbiz.board.repository.BoardRepository;
+import com.joyandbiz.board.repository.NoticeRepository;
 
 @Repository
-public class BoardMybatis implements BoardRepository{
+public class NoticeMybatis implements NoticeRepository{
 
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "boardMapper.";
+	private static final String NAMESPACE = "noticeMapper.";
 	
 	@Override
 	public List<BoardDTO> getBoardList() {

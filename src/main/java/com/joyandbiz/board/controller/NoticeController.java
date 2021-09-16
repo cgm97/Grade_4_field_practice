@@ -1,4 +1,6 @@
-package com.joyandbiz.board;
+package com.joyandbiz.board.controller;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -6,36 +8,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.joyandbiz.board.domain.BoardDTO;
-import com.joyandbiz.board.service.BoardService;
 
+import com.joyandbiz.board.IPConfig;
+import com.joyandbiz.board.domain.BoardDTO;
+import com.joyandbiz.board.service.NoticeService;
+
+@RequestMapping("/notice")
 @Controller
-public class BoardController {
+public class NoticeController {
 
 	@Autowired
-	private BoardService boardService;
-
-	@GetMapping("/")
-	public ModelAndView root() {
-		ModelAndView mv = new ModelAndView(); 
-		mv.setViewName("redirect:/list.do");
-		
-		return mv;
-	}
+	private NoticeService noticeService;
 	
 	@GetMapping("/list.do")
 	public ModelAndView list() {
+		
+		List<BoardDTO> BoardList = noticeService.getBoardList();		
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("boardList");
-		mv.addObject("getBoardList", boardService.getBoardList());
+		mv.addObject("boardList", BoardList);
 		
 		return mv;
 	}
 	
 	@PostMapping("/write.do")
 	public ModelAndView write(HttpServletRequest request, BoardDTO board) {
+		
 		IPConfig ip = new IPConfig();
 		ModelAndView mv = new ModelAndView();
 
@@ -43,37 +45,44 @@ public class BoardController {
 		board.setReg_ip(yourIP);
 		
 		mv.setViewName("redirect:/list.do");
-		boardService.writeBoard(board);
+		
+		noticeService.writeBoard(board);
 		
 		return mv;
 	}
 	
-	@GetMapping("/content")
-	public ModelAndView content(String con_no) {
+	@PostMapping("/detailContent.do")
+	public ModelAndView content(BoardDTO board) {
+		
+		BoardDTO contentInfo = noticeService.getContentByCon_No(board.getCon_no());		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("content");
-		mv.addObject("content", boardService.getContentByCon_No(con_no));
-		System.out.println(boardService.getContentByCon_No(con_no));
-		mv.addObject("con_no", con_no);
+		
+		mv.setViewName("detailContent");
+		mv.addObject("content", contentInfo);
 		
 		return mv;
 	}
 	
-	@GetMapping("/editContent")
-	public ModelAndView editContent(int key) {
+	@PostMapping("/editContent.do")
+	public ModelAndView editContent(BoardDTO board) {
+		
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("editContent");
-		mv.addObject("key", key);
+		mv.addObject("key", board.getKey());
 		
 		return mv;
 	}
 	
-	@GetMapping("/identification.do")
-	public ModelAndView identification(int key, String con_no) {
+	@PostMapping("/identification.do")
+	public ModelAndView identification(BoardDTO board) {
+		
 		ModelAndView mv = new ModelAndView();
+		
 		mv.setViewName("identification");
-		mv.addObject("key", key);
-		mv.addObject("con_no", con_no);
+		mv.addObject("key", board.getKey());
+		mv.addObject("con_no", board.getCon_no());
+		
 		return mv;
 	}
 	

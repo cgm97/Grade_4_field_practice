@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.joyandbiz.board.domain.BoardDTO;
 
-public interface BoardService {
+public interface NoticeService {
 	public List<BoardDTO> getBoardList();
 	
 	public BoardDTO getContentByCon_No(String con_no);

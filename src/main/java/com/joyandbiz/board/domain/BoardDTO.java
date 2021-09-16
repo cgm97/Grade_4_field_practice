@@ -12,6 +12,7 @@ public class BoardDTO {
 	private String reg_ip;
 	private String reg_date;
 	private String upd_date;
+	private int key;
 	
 	public String getCon_div() {
 		return con_div;
@@ -78,6 +79,12 @@ public class BoardDTO {
 	}
 	public void setUpd_date(String upd_date) {
 		this.upd_date = upd_date;
+	}
+	public int getKey() {
+		return key;
+	}
+	public void setKey(int key) {
+		this.key = key;
 	}
 	
 	@Override

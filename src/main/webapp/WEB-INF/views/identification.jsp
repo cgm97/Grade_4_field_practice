@@ -10,7 +10,14 @@
 <link href="<c:url value="/css/identification.css" />" rel='stylesheet' />
 </head>
 <script>
-	function submit(con_no) {
+
+	window.onload = function(){
+		
+		
+		
+	}
+	
+	var submit = function(con_no) {
 		
 		// 비동기로 처리해야함 오류난다.
 		var form =  document.identify;
@@ -18,7 +25,8 @@
 		form.submit();
 		//window.close();
 	};
-	function del(con_no) {
+	
+	var del = function(con_no) {
 		var choice = confirm(con_no + " 해당 게시물 정말 삭제 하시겠습니까?");
 		
 		if(choice){

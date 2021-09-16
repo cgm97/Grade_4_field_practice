@@ -51,6 +51,7 @@
 		    <div class="bottom">
 		    	<input class="button" type="submit" value="저장" />
 		    </div>
+		    
 		</div>
 	</form>
 </body>
