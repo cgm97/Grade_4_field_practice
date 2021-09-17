@@ -33,6 +33,7 @@ public class NoticeController {
 		
 		return mv;
 	}
+	
 	@GetMapping("/list.do")
 	public ModelAndView list(BoardDTO board) {
 		

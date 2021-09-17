@@ -120,7 +120,6 @@
 			<c:if test="${boardInfo.getKey() eq 3}">
 				<div style="padding-left: 95px">
 					<input class="button-cancel" type="button" onclick="window.close()" value="Cancel" />
-					<!-- 비동기 처리 삭제 -->
 					<input class="button" type="button" value="OK" onClick="del(${boardInfo.getCon_no()});"/>
 				</div>
 			</c:if>
