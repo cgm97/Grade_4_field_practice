@@ -26,6 +26,7 @@ public class NoticeController {
 	public ModelAndView root() {	
 		
 		ModelAndView mv = new ModelAndView(); 
+		logger.info(">>> notice / ");
 		mv.setViewName("redirect:/notice/list.do");
 		
 		return mv;
@@ -89,13 +90,15 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		logger.info(">>> checkIdentify.do");
+		
 		
 		mv.setViewName("/notice/identification");
-		mv.addObject("flag", noticeService.checkIdentify(board));
-		mv.addObject("key", board.getKey());// 본인 인증 확인 여부 True or False
+		mv.addObject("flag", noticeService.checkIdentify(board)); // 본인 인증 확인 성공 실패 여부 True or False
+		mv.addObject("key", board.getKey()); // 수정인지 삭제 인증 요청이었는지 판단
 		mv.addObject("boardInfo", board);
 		
+		
+		logger.info(">>> checkIdentify.do 본인인증 처리 결과 : " + noticeService.checkIdentify(board) + " " + board.getKey());
 		return mv;
 	}
 	
@@ -105,16 +108,36 @@ public class NoticeController {
 				
 		ModelAndView mv = new ModelAndView();
 		
-		logger.info(">>> write.do");
+		noticeService.writeBoard(request, board);
 		mv.setViewName("redirect:/notice/");
 		
-		noticeService.writeBoard(request, board);
-		
+				
 		return mv;
 	}
 	
 	// 삭제 처리 매핑 작성 / delete.do
-	
+	@PostMapping("/delete.do")
+	public ModelAndView delete(BoardDTO board) {
+		
+		ModelAndView mv = new ModelAndView();
+		logger.info(">>> delete.do");
+		
+		noticeService.deleteContent(board);
+		
+		mv.setViewName("redirect:/notice/");
+		return mv;
+	}
 	
 	// 게시물 수정 메핑 작성 /edit.do
+	@PostMapping("/edit.do")
+	public ModelAndView edit(BoardDTO board) {
+		
+		ModelAndView mv = new ModelAndView();
+		logger.info(">>> edit.do" + board.toString());
+		
+		int result = noticeService.editContent(board);
+		
+		mv.setViewName("redirect:/notice/");
+		return mv;
+	}
 }

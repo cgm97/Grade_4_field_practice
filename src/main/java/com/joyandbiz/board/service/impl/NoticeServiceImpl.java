@@ -61,8 +61,24 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public boolean checkIdentify(BoardDTO board) {
 		setCon_div(board);
-		logger.info(">>> 신원 확인");
+		logger.info(">>> 신원 확인"+ board.toString() );
 		
 		return dao.isCheckIdentify(board);
+	}
+
+	@Override
+	public int editContent(BoardDTO board) {
+		setCon_div(board);
+		logger.info(">>> 글 수정");
+		
+		return dao.updateBoard(board);
+	}
+
+	@Override
+	public int deleteContent(BoardDTO board) {
+		setCon_div(board);
+		logger.info(">>> 글  삭제");
+		
+		return dao.deleteBoard(board);
 	}
 }

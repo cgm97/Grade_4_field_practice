@@ -11,7 +11,7 @@
 
 		var form = document.content;
 		form.con_no.value = data;
-		form.key.value = 0;
+		form.key.value = 0; // form 하나 쓰기위해 지정함
 
 	    form.action = "<c:url value='/notice/detailContent.do' />";
 	    form.method = "POST";
@@ -20,7 +20,7 @@
 	var key = function(data){
 
 		var form = document.content;
-		form.con_no.value = null;
+		form.con_no.value = null; // form 하나 쓰기위해 지정함
 		form.key.value = data;
 
 	    form.action = "<c:url value='/notice/editContent.do' />";
@@ -79,7 +79,7 @@
       <div class="pagingBtn">1 2 3 4 5</div>
       <div class="writeBtn"><input class="button" type="button" onclick="key(1);" value="글쓰기" /></div>
     </div>
-    <form name="content">
+    <form name="content"> <!-- 상세보기 와 글쓰기 판단 후 POST 하기 위한 FORM -->
     	<input type="hidden" name="con_no"/>
     	<input type="hidden" name="key"/>
     </form>

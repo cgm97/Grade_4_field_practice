@@ -13,4 +13,8 @@ public interface NoticeRepository {
 	public int insertBoard(BoardDTO board);
 
 	public boolean isCheckIdentify(BoardDTO board);
+
+	public int updateBoard(BoardDTO board);
+
+	public int deleteBoard(BoardDTO board);
 }

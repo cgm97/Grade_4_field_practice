@@ -14,4 +14,8 @@ public interface NoticeService {
 	public int writeBoard(HttpServletRequest request, BoardDTO board);
 
 	public boolean checkIdentify(BoardDTO board);
+
+	public int editContent(BoardDTO board);
+
+	public int deleteContent(BoardDTO board);
 }

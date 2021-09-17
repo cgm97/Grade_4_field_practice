@@ -43,4 +43,14 @@ public class NoticeMybatis implements NoticeRepository{
 	public boolean isCheckIdentify(BoardDTO board) {
 		return sqlSession.selectOne(NAMESPACE+"isCheckIdentify", board);
 	}
+
+	@Override
+	public int updateBoard(BoardDTO board) {
+		return sqlSession.update(NAMESPACE+"updateBoard", board);
+	}
+
+	@Override
+	public int deleteBoard(BoardDTO board) {
+		return sqlSession.delete(NAMESPACE+"deleteBoard", board);
+	}
 }

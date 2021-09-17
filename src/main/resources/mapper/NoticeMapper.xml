@@ -46,4 +46,20 @@
    			FROM CONTENTS_DATA
    				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} AND CON_ID = #{con_id} AND PASSWORD = #{password}
    	</select>
+   	<!-- 글 수정 -->
+	<update id="updateBoard" parameterType="boardDTO" >
+		UPDATE CONTENTS_DATA 
+			SET CON_TITLE = #{con_title}, CON_TXT = #{con_txt}, UPD_DATE = SYSDATE
+				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 
+	</update>
+	<!-- 글 삭제  DELETE 구문 사용이 아닌 UPDATE 사용 , 게시물 삭제 해도 데이터 남기기 위함-->
+	<delete id="deleteBoard" parameterType="boardDTO">
+<!-- 	DELETE 
+			FROM CONTENTS_DATA
+				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 	 -->
+		UPDATE CONTENTS_DATA
+			SET DEL_YN = 'Y'
+				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}
+				
+	</delete>
 </mapper>

@@ -31,7 +31,10 @@
 		    	<table>
 			          <tr>
 			          	<td bgcolor="#EDEDED">제목</td>
-			          	<td colspan="3"><input style="width: 550px" type="text" name="con_title" placeholder="제목 입력" value="${boardInfo.getCon_title()}"></td>
+			          	<td colspan="3">
+			          		<input type="hidden" name="con_no" value="${boardInfo.getCon_no()}" />
+			          		<input style="width: 550px" type="text" name="con_title" placeholder="제목 입력" value="${boardInfo.getCon_title()}">
+			          	</td>
 			          </tr>
 			          <tr>
 			          	<td style= "height: 200px;" bgcolor="#EDEDED">내용</td>

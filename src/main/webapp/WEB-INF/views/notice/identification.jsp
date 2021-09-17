@@ -21,7 +21,8 @@
 			alert("수정 본인 인증 성공")
 			window.opener.name = "editContent"; // 부모창의 이름 설정
 		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
-		    document.identify.key.value = 2;
+		    document.identify.key.value = key;
+		    document.identify.con_no.value = "${boardInfo.getCon_no()}"
 		    document.identify.con_title.value = "${boardInfo.getCon_title()}";
 		    document.identify.con_txt.value = "${boardInfo.getCon_txt()}"
 		    document.identify.action = "/board/notice/editContent.do";
@@ -34,6 +35,8 @@
 			alert("삭제 본인 인증 성공")
 			window.opener.name = "editContent"; // 부모창의 이름 설정
 		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
+		    document.identify.key.value = key;
+		    document.identify.con_no.value = "${boardInfo.getCon_no()}"
 		    document.identify.action = "/board/notice/delete.do";
 		    document.identify.method = "POST"
 		    document.identify.submit();
@@ -50,6 +53,9 @@
 		
 		var form =  document.beforeIdentify;
 		form.key.value = 2;
+		form.con_no.value = "${boardInfo.getCon_no()}"
+		form.con_title.value = "${boardInfo.getCon_title()}";
+		form.con_txt.value = "${boardInfo.getCon_txt()}"
 		form.submit();
 	};
 	// 삭제 본인인증
@@ -59,6 +65,7 @@
 		if(choice){
 			var form =  document.beforeIdentify;
 			form.key.value = 3;
+			form.con_no.value = "${boardInfo.getCon_no()}"
 			form.submit();
 		}
 		else {
@@ -75,7 +82,7 @@
 		<c:if test="${boardInfo.getKey() eq 3}">
 			<h2>게시물 삭제 본인확인</h2>
 		</c:if>
-		<form name="beforeIdentify" action="/board/notice/checkIdentify.do" method="POST">
+		<form name="beforeIdentify" action="/board/notice/checkIdentify.do" method="POST"> <!-- 본인인증 하기 전 -->
 			<div class="idDiv">
 				<i style="width: 50px; height: 28px" class="fas fa-user fa-lg"></i>
 				<input type="text" name="con_id" placeholder="ID 입력" size="30"/>	
@@ -84,10 +91,17 @@
 				<i style="width: 50px; height: 28px" class="fas fa-key fa-lg"></i>
 				<input type="password" name="password" placeholder="PW 입력" size="30"/>	
 			</div>
-			<input type="hidden" name="con_no" value="${boardInfo.getCon_no()}"/>	
-			<input type="hidden" name="con_txt" value="${boardInfo.getCon_txt()}"/>	
-			<input type="hidden" name="con_title" value="${boardInfo.getCon_title()}"/>	
+			<input type="hidden" name="con_no"/>	<!-- 수정페이지에 전달하기 위햐 사용 -->
+			<input type="hidden" name="con_txt"/>	
+			<input type="hidden" name="con_title"/>	
 			<input type="hidden" name="key" />
+		</form>
+		
+		<form name="identify"> <!-- 본인인증 된 후  제목, 내용 수정페이지에 전달하기 위해 사용-->
+			<input type="hidden" name="key" />
+			<input type="hidden" name="con_no"/>	
+			<input type="hidden" name="con_title" />	
+			<input type="hidden" name="con_txt" />	
 		</form>
 		
 		<div class="bottom">
@@ -113,10 +127,5 @@
 			
 		</div>
 	</div>
-	<form name="identify">
-		<input type="hidden" name="key" />	
-		<input type="hidden" name="con_title" />	
-		<input type="hidden" name="con_txt" />	
-	</form>
 </body>
 </html>
