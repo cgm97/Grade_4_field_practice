@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.joyandbiz.board.domain.BoardDTO;
+import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.service.NoticeService;
 
 @RequestMapping("/notice")
@@ -26,8 +27,9 @@ public class NoticeController {
 	public ModelAndView root() {	
 		
 		ModelAndView mv = new ModelAndView(); 
-		logger.info(">>> notice / ");
+
 		mv.setViewName("redirect:/notice/list.do");
+		logger.info(">>> notice / ");
 		
 		return mv;
 	}
@@ -35,11 +37,30 @@ public class NoticeController {
 	public ModelAndView list(BoardDTO board) {
 		
 		List<BoardDTO> BoardList = noticeService.getBoardList(board);	
-		logger.info(">>> list.do");
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("/notice/boardList");
 		mv.addObject("boardList", BoardList);
+		logger.info(">>> list.do");
+		
+		return mv;
+	}
+	
+	@PostMapping("/search.do")
+	public ModelAndView search(SearchDTO sto) {
+		
+		List<BoardDTO> SearchedBoardList = noticeService.getSearchedBoardList(sto);	
+		ModelAndView mv = new ModelAndView();
+		
+		if (sto.getKeyword() == "") {
+			mv.setViewName("redirect:/notice/list.do");		
+			logger.info(">>> search.do >> redirect:list.do");
+
+		} else {
+			mv.setViewName("/notice/boardList");	
+			mv.addObject("boardList", SearchedBoardList);
+			logger.info(">>> search.do " + sto.toString());
+		}
 		
 		return mv;
 	}
@@ -51,9 +72,9 @@ public class NoticeController {
 		BoardDTO boardInfo = noticeService.getContentByCon_No(board);		
 		ModelAndView mv = new ModelAndView();
 		
-		logger.info(">>> detailContent.do");
 		mv.setViewName("/notice/detailContent");
 		mv.addObject("boardInfo", boardInfo);
+		logger.info(">>> detailContent.do");
 		
 		return mv;
 	}
@@ -64,9 +85,9 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		logger.info(">>> editContent.do");
 		mv.setViewName("/notice/editContent");
 		mv.addObject("boardInfo", board);
+		logger.info(">>> editContent.do");
 		
 		return mv;
 	}
@@ -76,10 +97,10 @@ public class NoticeController {
 	public ModelAndView identification(BoardDTO board) {
 		
 		ModelAndView mv = new ModelAndView();
-		
-		logger.info(">>> identification.do");
+				
 		mv.setViewName("/notice/identification");
 		mv.addObject("boardInfo", board);
+		logger.info(">>> identification.do");
 		
 		return mv;
 	}
@@ -89,16 +110,13 @@ public class NoticeController {
 	public ModelAndView checkIdentify(BoardDTO board) { // key = 2 수정, 3 삭제
 		
 		ModelAndView mv = new ModelAndView();
-		
-		
-		
+			
 		mv.setViewName("/notice/identification");
 		mv.addObject("flag", noticeService.checkIdentify(board)); // 본인 인증 확인 성공 실패 여부 True or False
 		mv.addObject("key", board.getKey()); // 수정인지 삭제 인증 요청이었는지 판단
-		mv.addObject("boardInfo", board);
-		
-		
+		mv.addObject("boardInfo", board);			
 		logger.info(">>> checkIdentify.do 본인인증 처리 결과 : " + noticeService.checkIdentify(board) + " " + board.getKey());
+		
 		return mv;
 	}
 	
@@ -106,12 +124,11 @@ public class NoticeController {
 	@PostMapping("/write.do")
 	public ModelAndView write(HttpServletRequest request, BoardDTO board) {
 				
-		ModelAndView mv = new ModelAndView();
-		
+		ModelAndView mv = new ModelAndView();		
 		noticeService.writeBoard(request, board);
-		mv.setViewName("redirect:/notice/");
 		
-				
+		mv.setViewName("redirect:/notice/");
+					
 		return mv;
 	}
 	
@@ -119,12 +136,12 @@ public class NoticeController {
 	@PostMapping("/delete.do")
 	public ModelAndView delete(BoardDTO board) {
 		
-		ModelAndView mv = new ModelAndView();
-		logger.info(">>> delete.do");
-		
+		ModelAndView mv = new ModelAndView();		
 		noticeService.deleteContent(board);
 		
 		mv.setViewName("redirect:/notice/");
+		logger.info(">>> delete.do");
+		
 		return mv;
 	}
 	
@@ -133,11 +150,11 @@ public class NoticeController {
 	public ModelAndView edit(BoardDTO board) {
 		
 		ModelAndView mv = new ModelAndView();
-		logger.info(">>> edit.do" + board.toString());
-		
-		int result = noticeService.editContent(board);
+		noticeService.editContent(board);
 		
 		mv.setViewName("redirect:/notice/");
+		logger.info(">>> edit.do" + board.toString());
+		
 		return mv;
 	}
 }

@@ -4,7 +4,6 @@
 <head>
 	<title>업무 관리 게시판</title>
 	<link href="<c:url value="/css/boardList.css" />" rel='stylesheet' />
-	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <script>
 	var content = function(data){
@@ -34,12 +33,14 @@
 	</div>
 	<div class="container">
 	    <div class="top">
-	    	<select>
-	    		<option>제목</option>
-	    		<option>작성자</option>
-	    	</select>
-	  		<input type="text" placeholder="검색어 입력" />
-	  		<input type="button" class="fas fa-search fa-lg"  />
+	    	<form action='<c:url value="/notice/search.do" />' method="POST">	    	
+		    	<select name="search_option">
+		    		<option value="title">제목</option>
+		    		<option value="id">작성자</option>
+		    	</select>
+		  		<input type="text" name="keyword" placeholder="검색어 입력" />
+		  		<input type="submit" value="검색"  />
+	    	</form>
 	    </div>
 	    
 	    <div>

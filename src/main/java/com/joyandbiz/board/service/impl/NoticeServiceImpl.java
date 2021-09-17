@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.joyandbiz.board.IPConfig;
 import com.joyandbiz.board.domain.BoardDTO;
+import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 import com.joyandbiz.board.service.NoticeService;
 
@@ -80,5 +81,13 @@ public class NoticeServiceImpl implements NoticeService {
 		logger.info(">>> 글  삭제");
 		
 		return dao.deleteBoard(board);
+	}
+
+	@Override
+	public List<BoardDTO> getSearchedBoardList(SearchDTO sto) {
+		sto.setCon_div("01");
+		logger.info(">>> 글  검색");
+		
+		return dao.selectSearchBoard(sto);
 	}
 }

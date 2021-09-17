@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.joyandbiz.board.domain.BoardDTO;
+import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 
 @Repository
@@ -22,7 +23,12 @@ public class NoticeMybatis implements NoticeRepository{
 	public List<BoardDTO> getBoardList(BoardDTO board) {
 		return sqlSession.selectList(NAMESPACE+"getBoardList", board);
 	}
-
+	
+	@Override
+	public List<BoardDTO> selectSearchBoard(SearchDTO sto) {
+		return sqlSession.selectList(NAMESPACE+"selectSearchBoardList", sto);
+	}
+	
 	@Override
 	public BoardDTO getContentByCon_No(BoardDTO board) {
 		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", board);

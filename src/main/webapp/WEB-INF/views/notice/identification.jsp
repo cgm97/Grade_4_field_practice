@@ -33,8 +33,8 @@
 		// 삭제 본인인증 판단 후
 		else if (flag == true && key == 3) {
 			alert("삭제 본인 인증 성공")
-			window.opener.name = "editContent"; // 부모창의 이름 설정
-		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
+			window.opener.name = "deleteContent"; // 부모창의 이름 설정
+		    document.identify.target = "deleteContent"; // 타켓을 부모창으로 설정
 		    document.identify.key.value = key;
 		    document.identify.con_no.value = "${boardInfo.getCon_no()}"
 		    document.identify.action = "/board/notice/delete.do";
@@ -62,7 +62,7 @@
 	var del = function(con_no) {
 		var choice = confirm("해당 게시물 정말 삭제 하시겠습니까?");
 		
-		if(choice){
+		if (choice){
 			var form =  document.beforeIdentify;
 			form.key.value = 3;
 			form.con_no.value = "${boardInfo.getCon_no()}"

@@ -2,6 +2,7 @@ package com.joyandbiz.board.repository;
 
 import java.util.List;
 import com.joyandbiz.board.domain.BoardDTO;
+import com.joyandbiz.board.domain.SearchDTO;
 
 public interface NoticeRepository {
 	public List<BoardDTO> getBoardList(BoardDTO board);
@@ -17,4 +18,6 @@ public interface NoticeRepository {
 	public int updateBoard(BoardDTO board);
 
 	public int deleteBoard(BoardDTO board);
+
+	public List<BoardDTO> selectSearchBoard(SearchDTO sto);
 }

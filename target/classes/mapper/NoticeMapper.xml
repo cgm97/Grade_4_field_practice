@@ -20,7 +20,7 @@
 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
 	  	 	FROM CONTENTS_DATA 
-	  	 		WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(con_no) DESC
+	  	 		WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(CON_NO) DESC
    </select>
     <!-- 게시물 상세보기 -->
     <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
@@ -59,7 +59,19 @@
 				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 	 -->
 		UPDATE CONTENTS_DATA
 			SET DEL_YN = 'Y'
-				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}
-				
+				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}				
 	</delete>
+	<!-- 게시판 검색 목록 조회 -->
+	<select id="selectSearchBoardList"  parameterType="com.joyandbiz.board.domain.SearchDTO" resultType="boardDTO">
+		 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
+		 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
+		 	FROM CONTENTS_DATA 
+ 			<if test="search_option == 'title'">
+		 				WHERE CON_DIV = #{con_div} AND DEL_YN='N' AND CON_TITLE LIKE '%'||#{keyword}||'%'
+			</if>
+			<if test="search_option == 'id'">
+		 				WHERE CON_DIV = #{con_div} AND DEL_YN='N' AND CON_ID LIKE '%'||#{keyword}||'%'
+			</if>		
+			ORDER BY ABS(CON_NO) DESC		
+	</select>
 </mapper>
