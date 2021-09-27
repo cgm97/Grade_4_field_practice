@@ -64,7 +64,7 @@
 	          	<tbody>
 	          	<c:forEach var="boardList" items="${boardList}">
 	          		<tr>
-	              		<td style="text-align: center;"><c:out value="${boardList.getCon_no()}" /></td>
+	              		<td style="text-align: center;"><c:out value="${boardList.getRowNum()}" /></td>
 	                    <td><a href="javascript:content(${boardList.getCon_no()});"><c:out value="${boardList.getCon_title()}" /></a></td>
 	                    <td style="text-align: center;"><c:out value="${boardList.getCon_id()}" /></td>
 	                  	<td style="text-align: center;"><c:out value="${boardList.getReg_date()}" /></td>
@@ -77,7 +77,23 @@
    </div>
    
     <div class='bottom'>
-      <div class="pagingBtn">1 2 3 4 5</div>
+    
+      <div class="pagingBtn">
+		  <ul>
+		    <c:if test="${pageMaker.prev}">
+		    	<li><a href="list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+		    </c:if> 
+		
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+		    	<li><a href="list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+		    </c:forEach>
+		
+		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+		    	<li><a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+		    </c:if> 
+		  </ul>
+      </div>
+      
       <div class="writeBtn"><input class="button" type="button" onclick="key(1);" value="글쓰기" /></div>
     </div>
     <form name="content"> <!-- 상세보기 와 글쓰기 판단 후 POST 하기 위한 FORM -->

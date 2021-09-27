@@ -1,12 +1,12 @@
 package com.joyandbiz.board.repository.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
@@ -20,8 +20,8 @@ public class NoticeMybatis implements NoticeRepository{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<BoardDTO> getBoardList(BoardDTO board) {
-		return sqlSession.selectList(NAMESPACE+"getBoardList", board);
+	public List<BoardDTO> getBoardList(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE+"getBoardList", map);
 	}
 	
 	@Override
@@ -58,5 +58,11 @@ public class NoticeMybatis implements NoticeRepository{
 	@Override
 	public int deleteBoard(BoardDTO board) {
 		return sqlSession.delete(NAMESPACE+"deleteBoard", board);
+	}
+
+	@Override
+	public int countBoardList(BoardDTO board) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+"countBoardList", board);
 	}
 }

@@ -44,5 +44,10 @@ table {
 	display: inline-block;
 	text-align: right;
 }
+li{
+	list-style: none;
+	float: left;
+	padding: 6px;
+}
 a:link { color: blue; text-decoration: none;}
 a:hover { color: red; text-decoration: none;}

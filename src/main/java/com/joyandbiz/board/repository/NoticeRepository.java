@@ -1,11 +1,12 @@
 package com.joyandbiz.board.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.domain.SearchDTO;
 
 public interface NoticeRepository {
-	public List<BoardDTO> getBoardList(BoardDTO board);
+	public List<BoardDTO> getBoardList(HashMap<String, Object> map);
 
 	public BoardDTO getContentByCon_No(BoardDTO board);
 
@@ -20,4 +21,6 @@ public interface NoticeRepository {
 	public int deleteBoard(BoardDTO board);
 
 	public List<BoardDTO> selectSearchBoard(SearchDTO sto);
+	
+	public int countBoardList(BoardDTO board);
 }

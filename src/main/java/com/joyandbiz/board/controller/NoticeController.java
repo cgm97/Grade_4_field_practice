@@ -1,5 +1,6 @@
 package com.joyandbiz.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.joyandbiz.board.Criteria;
+import com.joyandbiz.board.PageMaker;
 import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.service.NoticeService;
@@ -35,13 +39,21 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list.do")
-	public ModelAndView list(BoardDTO board) {
+	public ModelAndView list(BoardDTO board, Criteria cri, HashMap<String, Object> map) {
 		
-		List<BoardDTO> BoardList = noticeService.getBoardList(board);	
+		map.put("board", board);
+		map.put("cri", cri);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(noticeService.countBoardList(board));
+		
+		List<BoardDTO> BoardList = noticeService.getBoardList(map);	
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("/notice/boardList");
 		mv.addObject("boardList", BoardList);
+		mv.addObject("pageMaker", pageMaker);
 		logger.info(">>> list.do");
 		
 		return mv;

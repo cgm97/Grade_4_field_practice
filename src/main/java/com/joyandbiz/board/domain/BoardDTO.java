@@ -13,6 +13,7 @@ public class BoardDTO {
 	private String reg_date;
 	private String upd_date;
 	private int key;
+	private String rowNum;
 	
 	public String getCon_div() {
 		return con_div;
@@ -85,6 +86,13 @@ public class BoardDTO {
 	}
 	public void setKey(int key) {
 		this.key = key;
+	}
+	
+	public String getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(String rowNum) {
+		this.rowNum = rowNum;
 	}
 	
 	@Override

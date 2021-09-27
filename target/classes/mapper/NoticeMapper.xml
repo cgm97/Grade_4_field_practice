@@ -3,24 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeMapper">
-   <!-- 이름 겸색 테스트 -->
-<!--    <select id="getListMember" resultType="memberDTO">
-	  	 SELECT * 
-	  	 	FROM MEMBER 
-   </select>
-
-   멤버 추가
-   <insert id="insertMember" parameterType="memberDTO">
-   			INSERT INTO MEMBER (NAME,AGE)
-				VALUES(#{name},#{age})
-   </insert> -->
-   
+ 
    <!-- 게시판 목록 조회 -->
-   <select id="getBoardList"  parameterType="boardDTO" resultType="boardDTO">
-	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
+   <select id="getBoardList"  parameterType="HASHMAP" resultType="boardDTO">
+<!-- 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
 	  	 	FROM CONTENTS_DATA 
-	  	 		WHERE CON_DIV = #{con_div} AND DEL_YN='N' ORDER BY ABS(CON_NO) DESC
+	  	 		WHERE CON_DIV = #{board.con_div} AND DEL_YN='N' ORDER BY ABS(CON_NO) DESC -->
+	  	 SELECT ROWNUM, CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, READ_COUNT, REG_DATE, UPD_DATE  from 
+	  	 	(SELECT ROWNUM RN, CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
+	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
+	  	 	FROM CONTENTS_DATA  
+	  	 		WHERE <![CDATA[ROWNUM <= #{cri.rowEnd}]]> AND CON_DIV = #{board.con_div} AND DEL_YN='N' ORDER BY ABS(CON_NO) DESC)
+         where RN >= #{cri.rowStart}	 
+	  	 
    </select>
     <!-- 게시물 상세보기 -->
     <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
@@ -73,5 +69,11 @@
 		 				WHERE CON_DIV = #{con_div} AND DEL_YN='N' AND CON_ID LIKE '%'||#{keyword}||'%'
 			</if>		
 			ORDER BY ABS(CON_NO) DESC		
+	</select>
+	<!-- 게시판 목록 총 갯수 조회 -->
+	<select id="countBoardList" parameterType="boardDTO" resultType="integer">
+		SELECT COUNT(*)
+			FROM CONTENTS_DATA
+				WHERE CON_DIV = #{con_div} AND DEL_YN='N'
 	</select>
 </mapper>

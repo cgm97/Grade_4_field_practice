@@ -1,14 +1,12 @@
 package com.joyandbiz.board.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.joyandbiz.board.IPConfig;
 import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.domain.SearchDTO;
@@ -30,11 +28,15 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<BoardDTO> getBoardList(BoardDTO board) {
-		setCon_div(board);
+	public List<BoardDTO> getBoardList(HashMap<String, Object> map) {
 		logger.info(">>> 게시판 리스트 가져오기");
 		
-		return dao.getBoardList(board);
+		BoardDTO board = new BoardDTO();
+		board = (BoardDTO) map.get("board");
+		setCon_div(board);
+		map.put("board", board);
+		
+		return dao.getBoardList(map);
 	}
 
 	@Override
@@ -89,5 +91,13 @@ public class NoticeServiceImpl implements NoticeService {
 		logger.info(">>> 글  검색");
 		
 		return dao.selectSearchBoard(sto);
+	}
+
+	@Override
+	public int countBoardList(BoardDTO board) {
+		setCon_div(board);
+		logger.info(">>> 게시물 총 갯수 조회"+ board.toString());
+		
+		return dao.countBoardList(board);
 	}
 }
