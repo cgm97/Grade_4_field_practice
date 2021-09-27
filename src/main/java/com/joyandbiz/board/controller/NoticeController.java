@@ -39,14 +39,14 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list.do")
-	public ModelAndView list(BoardDTO board, Criteria cri, HashMap<String, Object> map) {
+	public ModelAndView list(SearchDTO sto ,BoardDTO board, Criteria cri, HashMap<String, Object> map) {
 		
 		map.put("board", board);
 		map.put("cri", cri);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(noticeService.countBoardList(board));
+		pageMaker.setTotalCount(noticeService.countBoardList(sto));
 		
 		List<BoardDTO> BoardList = noticeService.getBoardList(map);	
 		ModelAndView mv = new ModelAndView();
@@ -60,10 +60,18 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/search.do")
-	public ModelAndView search(SearchDTO sto) {
+	public ModelAndView search(SearchDTO sto, Criteria cri, HashMap<String, Object> map) {
+		logger.info(">>> search.do " + sto.toString());
 		
-		List<BoardDTO> SearchedBoardList = noticeService.getSearchedBoardList(sto);	
+		map.put("search", sto);
+		map.put("cri", cri);
+		
+		List<BoardDTO> SearchedBoardList = noticeService.getSearchedBoardList(map);	
 		ModelAndView mv = new ModelAndView();
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(noticeService.countBoardList(sto));
 		
 		if (sto.getKeyword() == "") {
 			mv.setViewName("redirect:/notice/list.do");		
@@ -72,6 +80,7 @@ public class NoticeController {
 		} else {
 			mv.setViewName("/notice/boardList");	
 			mv.addObject("boardList", SearchedBoardList);
+			mv.addObject("pageMaker", pageMaker);
 			logger.info(">>> search.do " + sto.toString());
 		}
 		

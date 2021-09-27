@@ -13,8 +13,7 @@ public class BoardDTO {
 	private String reg_date;
 	private String upd_date;
 	private int key;
-	private String rowNum;
-	
+	private String rn;
 	public String getCon_div() {
 		return con_div;
 	}
@@ -87,18 +86,17 @@ public class BoardDTO {
 	public void setKey(int key) {
 		this.key = key;
 	}
-	
-	public String getRowNum() {
-		return rowNum;
+	public String getRn() {
+		return rn;
 	}
-	public void setRowNum(String rowNum) {
-		this.rowNum = rowNum;
+	public void setRn(String rn) {
+		this.rn = rn;
 	}
-	
 	@Override
 	public String toString() {
 		return "BoardDTO [con_div=" + con_div + ", con_no=" + con_no + ", con_title=" + con_title + ", con_txt="
 				+ con_txt + ", con_id=" + con_id + ", password=" + password + ", read_count=" + read_count + ", del_yn="
-				+ del_yn + ", reg_ip=" + reg_ip + ", reg_date=" + reg_date + ", upd_date=" + upd_date + "]";
+				+ del_yn + ", reg_ip=" + reg_ip + ", reg_date=" + reg_date + ", upd_date=" + upd_date + ", key=" + key
+				+ ", rn=" + rn + "]";
 	}
 }

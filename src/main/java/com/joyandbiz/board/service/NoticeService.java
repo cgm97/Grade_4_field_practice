@@ -20,8 +20,8 @@ public interface NoticeService {
 
 	public int deleteContent(BoardDTO board);
 
-	public List<BoardDTO> getSearchedBoardList(SearchDTO sto);
+	public List<BoardDTO> getSearchedBoardList(HashMap<String, Object> map);
 	
-	public int countBoardList(BoardDTO board);
+	public int countBoardList(SearchDTO sto);
 
 }

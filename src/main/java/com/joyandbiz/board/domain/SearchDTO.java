@@ -25,7 +25,6 @@ public class SearchDTO {
 	}
 	@Override
 	public String toString() {
-		return "SearchDTO [search_option=" + search_option + ", keyword=" + keyword + "]";
+		return "SearchDTO [search_option=" + search_option + ", keyword=" + keyword + ", con_div=" + con_div + "]";
 	}
-	
 }

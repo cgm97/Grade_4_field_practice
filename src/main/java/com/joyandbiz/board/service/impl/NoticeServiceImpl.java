@@ -86,18 +86,22 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<BoardDTO> getSearchedBoardList(SearchDTO sto) {
+	public List<BoardDTO> getSearchedBoardList(HashMap<String, Object> map) {
+		SearchDTO sto = new SearchDTO();
+		sto = (SearchDTO) map.get("search");
 		sto.setCon_div("01");
+		map.put("search", sto);
 		logger.info(">>> ±Û  °Ë»ö");
 		
-		return dao.selectSearchBoard(sto);
+		return dao.selectSearchBoard(map);
 	}
 
 	@Override
-	public int countBoardList(BoardDTO board) {
-		setCon_div(board);
-		logger.info(">>> °Ô½Ã¹° ÃÑ °¹¼ö Á¶È¸"+ board.toString());
+	public int countBoardList(SearchDTO sto) {
+		logger.info(">>> °Ô½Ã¹° ÃÑ °¹¼ö Á¶È¸");
 		
-		return dao.countBoardList(board);
+			sto.setCon_div("01");
+
+		return dao.countBoardList(sto);		
 	}
 }

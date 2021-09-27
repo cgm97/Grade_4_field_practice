@@ -64,7 +64,7 @@
 	          	<tbody>
 	          	<c:forEach var="boardList" items="${boardList}">
 	          		<tr>
-	              		<td style="text-align: center;"><c:out value="${boardList.getRowNum()}" /></td>
+	              		<td style="text-align: center;"><c:out value="${boardList.getRn()}" /></td>
 	                    <td><a href="javascript:content(${boardList.getCon_no()});"><c:out value="${boardList.getCon_title()}" /></a></td>
 	                    <td style="text-align: center;"><c:out value="${boardList.getCon_id()}" /></td>
 	                  	<td style="text-align: center;"><c:out value="${boardList.getReg_date()}" /></td>

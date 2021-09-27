@@ -25,8 +25,8 @@ public class NoticeMybatis implements NoticeRepository{
 	}
 	
 	@Override
-	public List<BoardDTO> selectSearchBoard(SearchDTO sto) {
-		return sqlSession.selectList(NAMESPACE+"selectSearchBoardList", sto);
+	public List<BoardDTO> selectSearchBoard(HashMap<String, Object> map) {
+		return sqlSession.selectList(NAMESPACE+"selectSearchBoardList", map);
 	}
 	
 	@Override
@@ -61,8 +61,8 @@ public class NoticeMybatis implements NoticeRepository{
 	}
 
 	@Override
-	public int countBoardList(BoardDTO board) {
+	public int countBoardList(SearchDTO sto) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+"countBoardList", board);
+		return sqlSession.selectOne(NAMESPACE+"countBoardList", sto);
 	}
 }

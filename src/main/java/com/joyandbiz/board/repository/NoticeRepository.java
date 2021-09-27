@@ -20,7 +20,7 @@ public interface NoticeRepository {
 
 	public int deleteBoard(BoardDTO board);
 
-	public List<BoardDTO> selectSearchBoard(SearchDTO sto);
+	public List<BoardDTO> selectSearchBoard(HashMap<String, Object> map);
 	
-	public int countBoardList(BoardDTO board);
+	public int countBoardList(SearchDTO sto);
 }
