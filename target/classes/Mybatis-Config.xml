@@ -6,6 +6,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="BoardDTO" type="com.joyandbiz.board.domain.BoardDTO"/>
+		<typeAlias alias="Scri" type="com.joyandbiz.board.SearchCriteria"/>
 	</typeAliases>
 
 	<mappers>

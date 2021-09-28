@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="noticeMapper">
  
-   <!-- 게시판 목록 조회 -->
-   <select id="getBoardList"  parameterType="com.joyandbiz.board.SearchCriteria" resultType="boardDTO">
+    <!-- 게시판 전체 목록 및 검색 목록 조회 -->
+    <select id="getBoardList"  parameterType="Scri" resultType="boardDTO">
 <!-- 	  	 SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD,
 	  	 		READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE 
 	  	 	FROM CONTENTS_DATA 
@@ -17,65 +17,69 @@
 	  	 		WHERE <![CDATA[ROWNUM < #{cri.rowEnd}]]> AND CON_DIV = #{board.con_div} AND DEL_YN='N' 
 	  	 			ORDER BY ABS(CON_NO) DESC) A)
         		WHERE <![CDATA[RN >= #{cri.rowStart}]]> -->  		
-        	 SELECT rNum RN, CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, READ_COUNT, REG_DATE, UPD_DATE 
-                FROM(
-                   		SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, 
-                            READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE,
-                            row_number() over(order by ABS(CON_NO) DESC) as rNum
-                        FROM contents_data WHERE CON_DIV = #{con_div} AND DEL_YN='N'
-                    <if test= 'searchType eq "title" '>
-	 					AND CON_TITLE 
-	 					<include refid="search" />
-					</if>
-					<if test= 'searchType eq "id" '>
-				 		AND CON_ID
-				 		<include refid="search" />
-					</if>	
-					 )A	
-					 WHERE rNum BETWEEN 
-	                   	 #{rowStart} AND #{rowEnd}
-	                    	 order by ABS(CON_NO) DESC
-	  	 
-   </select>
-    <!-- 게시물 상세보기 -->
-    <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
+       	 SELECT rNum RN, CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, READ_COUNT, REG_DATE, UPD_DATE 
+               FROM(
+                  		SELECT CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, 
+                           READ_COUNT, TO_CHAR(REG_DATE,'MM-DD HH24:MI:SS') as REG_DATE, UPD_DATE,
+                           row_number() over(order by ABS(CON_NO) DESC) as rNum
+                       FROM contents_data WHERE CON_DIV = #{con_div} AND DEL_YN='N'
+			<if test= 'searchType eq "title" '>
+				 					AND CON_TITLE 
+				 					<include refid="search" />
+								</if>
+			<if test= 'searchType eq "id" '>
+			 		AND CON_ID
+			 		<include refid="search" />
+				</if>	
+			 )A	
+			 WHERE rNum BETWEEN 
+                  	 #{rowStart} AND #{rowEnd}
+                    	order by ABS(CON_NO) DESC	  	 
+    </select>
+   
+     <!-- 게시물 상세보기 -->
+     <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
 	  	 SELECT CON_NO, CON_TITLE, CON_TXT	 		
 	  	 	FROM CONTENTS_DATA 
-	  	 		WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}
-   </select>
-   <!-- 조회수 카운팅 -->
-   <update id="plusReadCount" parameterType="boardDTO">
+	  	 		WHERE <include refid="div_no" />
+    </select>
+   
+    <!-- 조회수 카운팅 -->
+    <update id="plusReadCount" parameterType="boardDTO">
     	UPDATE CONTENTS_DATA 
     		SET READ_COUNT = READ_COUNT+1 
-    			WHERE CON_NO = #{con_no}
-   </update>
-   <!-- 글쓰기 -->
-   <insert id="insertBoard" parameterType="boardDTO">
+    			WHERE <include refid="div_no" />
+    </update>
+   
+    <!-- 글쓰기 -->
+    <insert id="insertBoard" parameterType="boardDTO">
    		INSERT INTO CONTENTS_DATA (CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, REG_IP) 
    			 VALUES (#{con_div}, (SELECT NVL(MAX(ABS(CON_NO))+1,1) 
    			 	FROM CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
-   </insert>
-   <!-- 본인 인증 -->
-   <select id="isCheckIdentify" parameterType="boardDTO" resultType="boolean">
+    </insert>
+   
+    <!-- 본인 인증 -->
+    <select id="isCheckIdentify" parameterType="boardDTO" resultType="boolean">
    		SELECT CASE WHEN count(*)=1 THEN 1 ELSE 0 END
    			FROM CONTENTS_DATA
-   				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} AND CON_ID = #{con_id} AND PASSWORD = #{password}
+   				WHERE <include refid="div_no" /> AND CON_ID = #{con_id} AND PASSWORD = #{password}
    	</select>
+   	
    	<!-- 글 수정 -->
 	<update id="updateBoard" parameterType="boardDTO" >
 		UPDATE CONTENTS_DATA 
 			SET CON_TITLE = #{con_title}, CON_TXT = #{con_txt}, UPD_DATE = SYSDATE
-				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 
+				WHERE <include refid="div_no" />
 	</update>
 	<!-- 글 삭제  DELETE 구문 사용이 아닌 UPDATE 사용 , 게시물 삭제 해도 데이터 남기기 위함-->
-	<delete id="deleteBoard" parameterType="boardDTO">
+	<update id="deleteBoard" parameterType="boardDTO">
 <!-- 	DELETE 
 			FROM CONTENTS_DATA
 				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 	 -->
 		UPDATE CONTENTS_DATA
 			SET DEL_YN = 'Y'
-				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no}				
-	</delete>
+				WHERE <include refid="div_no" />				
+	</update>
 	<!-- 게시판 검색 목록 조회 -->
 <!-- 	<select id="selectSearchBoardList"  parameterType="HASHMAP" resultType="boardDTO">
 		SELECT rNum RN, CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, READ_COUNT, REG_DATE, UPD_DATE 
@@ -97,7 +101,7 @@
                     	 order by ABS(CON_NO) DESC
 	</select> -->
 	<!-- 게시판 목록 총 갯수 조회 -->
-	<select id="countBoardList" parameterType="com.joyandbiz.board.SearchCriteria" resultType="integer">
+	<select id="countBoardList" parameterType="Scri" resultType="integer">
 		SELECT COUNT(*)
 			FROM CONTENTS_DATA
 				WHERE CON_DIV = #{con_div} AND DEL_YN='N'
@@ -109,6 +113,10 @@
 				</if>
 	</select>
 	
+	<!-- 중복 쿼리 정리 -->
+	<sql id="div_no">
+		CON_DIV = #{con_div} AND CON_NO = #{con_no}
+	</sql>
 	<sql id="search">
 		 LIKE '%'||#{keyword}||'%'
 	</sql>

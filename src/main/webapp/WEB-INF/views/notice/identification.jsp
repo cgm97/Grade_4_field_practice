@@ -13,11 +13,10 @@
 	window.onload = function(){
 
 		var key = "<c:out value='${key}'/>"; 
-		var flag = ${flag}
-		console.log(flag);
+		var flag = "${flag}";
 		
-		// 수정 본인인증 판단 후
-		if (flag == true && key == 2) {
+		// 수정 본인인증 판단 후 2번
+		if (flag == "true" && key == 2) {
 			alert("수정 본인 인증 성공")
 			window.opener.name = "editContent"; // 부모창의 이름 설정
 		    document.identify.target = "editContent"; // 타켓을 부모창으로 설정
@@ -30,8 +29,8 @@
 		    document.identify.submit();
 		    self.close();
 		}
-		// 삭제 본인인증 판단 후
-		else if (flag == true && key == 3) {
+		// 삭제 본인인증 판단 후 3번
+		else if (flag == "true" && key == 3) {
 			alert("삭제 본인 인증 성공")
 			window.opener.name = "deleteContent"; // 부모창의 이름 설정
 		    document.identify.target = "deleteContent"; // 타켓을 부모창으로 설정
@@ -42,13 +41,13 @@
 		    document.identify.submit();
 		    self.close();
 		}
-		else if (flag == false) { 
+		else if (flag == "false") { 
 			alert("본인 인증 실패")
 			window.close();
 		}
 
 	};
-	// 수정 본인인증
+	// 수정 본인인증 - 2번
 	var submit = function(con_no) {
 		
 		var form =  document.beforeIdentify;
@@ -58,7 +57,7 @@
 		form.con_txt.value = "${boardInfo.getCon_txt()}"
 		form.submit();
 	};
-	// 삭제 본인인증
+	// 삭제 본인인증 - 3번
 	var del = function(con_no) {
 		var choice = confirm("해당 게시물 정말 삭제 하시겠습니까?");
 		
