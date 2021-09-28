@@ -1,6 +1,5 @@
 package com.joyandbiz.board.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -8,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.joyandbiz.board.IPConfig;
+import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.domain.BoardDTO;
-import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 import com.joyandbiz.board.service.NoticeService;
 
@@ -20,29 +19,33 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeRepository dao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public BoardDTO setCon_div(BoardDTO board) { // 게시판 구분자 지정 메소드
+	public BoardDTO setBoardCon_div(BoardDTO board) { // 게시판 구분자 지정 메소드
 		board.setCon_div("01");
-		logger.info(">>> 게시판 구분자 : " + board.getCon_div()+" 설정");
+		logger.info(">>> 게시판 구분자 : Board 01 : 설정");
 		
 		return board;
 	}
 	
+	public SearchCriteria setScriCon_div(SearchCriteria scri) { // 게시판  검색 구분자 지정 메소드
+		scri.setCon_div("01");
+		logger.info(">>> 게시판 구분자 Scri 01 : 설정");
+		
+		return scri;
+	}
+	
 	@Override
-	public List<BoardDTO> getBoardList(HashMap<String, Object> map) {
+	public List<BoardDTO> getBoardList(SearchCriteria scri) {
 		logger.info(">>> 게시판 리스트 가져오기");
 		
-		BoardDTO board = new BoardDTO();
-		board = (BoardDTO) map.get("board");
-		setCon_div(board);
-		map.put("board", board);
+		setScriCon_div(scri);
 		
-		return dao.getBoardList(map);
+		return dao.getBoardList(scri);
 	}
 
 	@Override
 	public BoardDTO getContentByCon_No(BoardDTO board) {
 		// 게시물 조회수 카운팅
-		setCon_div(board);
+		setBoardCon_div(board);
 		dao.plusReadCount(board);
 		logger.info(">>> 게시판 상세보기");
 		
@@ -54,7 +57,7 @@ public class NoticeServiceImpl implements NoticeService {
 		IPConfig ip = new IPConfig();
 		String yourIP = ip.getIPConfig(request);
 
-		setCon_div(board);
+		setBoardCon_div(board);
 		board.setReg_ip(yourIP);
 		logger.info(">>> 게시판 글쓰기");
 		
@@ -63,7 +66,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public boolean checkIdentify(BoardDTO board) {
-		setCon_div(board);
+		setBoardCon_div(board);
 		logger.info(">>> 신원 확인"+ board.toString() );
 		
 		return dao.isCheckIdentify(board);
@@ -71,7 +74,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public int editContent(BoardDTO board) {
-		setCon_div(board);
+		setBoardCon_div(board);
 		logger.info(">>> 글 수정");
 		
 		return dao.updateBoard(board);
@@ -79,29 +82,26 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public int deleteContent(BoardDTO board) {
-		setCon_div(board);
+		setBoardCon_div(board);
 		logger.info(">>> 글  삭제");
 		
 		return dao.deleteBoard(board);
 	}
 
-	@Override
-	public List<BoardDTO> getSearchedBoardList(HashMap<String, Object> map) {
-		SearchDTO sto = new SearchDTO();
-		sto = (SearchDTO) map.get("search");
-		sto.setCon_div("01");
-		map.put("search", sto);
-		logger.info(">>> 글  검색");
-		
-		return dao.selectSearchBoard(map);
-	}
+	/*
+	 * @Override public List<BoardDTO> getSearchedBoardList(HashMap<String, Object>
+	 * map) { SearchDTO sto = new SearchDTO(); sto = (SearchDTO) map.get("search");
+	 * sto.setCon_div("01"); map.put("search", sto); logger.info(">>> 글  검색");
+	 * 
+	 * return dao.selectSearchBoard(map); }
+	 */
 
 	@Override
-	public int countBoardList(SearchDTO sto) {
+	public int countBoardList(SearchCriteria scri) {
 		logger.info(">>> 게시물 총 갯수 조회");
 		
-			sto.setCon_div("01");
+		setScriCon_div(scri);
 
-		return dao.countBoardList(sto);		
+		return dao.countBoardList(scri);		
 	}
 }

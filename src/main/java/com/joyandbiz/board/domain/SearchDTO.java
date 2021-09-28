@@ -1,6 +1,6 @@
 package com.joyandbiz.board.domain;
 
-public class SearchDTO {
+public class SearchDTO { ////////////////////////////// 현재 사용 X -> SearchCriteria로 전환 사용중
 	private String search_option;
 	private String keyword;
 	private String con_div;

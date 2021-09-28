@@ -1,8 +1,6 @@
 package com.joyandbiz.board.controller;
 
-import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,11 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.joyandbiz.board.Criteria;
 import com.joyandbiz.board.PageMaker;
+import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.domain.BoardDTO;
-import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.service.NoticeService;
 
 @RequestMapping("/notice")
@@ -39,53 +35,46 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list.do")
-	public ModelAndView list(SearchDTO sto ,BoardDTO board, Criteria cri, HashMap<String, Object> map) {
-		
-		map.put("board", board);
-		map.put("cri", cri);
+	public ModelAndView list(SearchCriteria scri) {
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(noticeService.countBoardList(sto));
+		pageMaker.setCri(scri);
+		pageMaker.setTotalCount(noticeService.countBoardList(scri));
 		
-		List<BoardDTO> BoardList = noticeService.getBoardList(map);	
+		List<BoardDTO> BoardList = noticeService.getBoardList(scri);	
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("/notice/boardList");
 		mv.addObject("boardList", BoardList);
 		mv.addObject("pageMaker", pageMaker);
+		
 		logger.info(">>> list.do");
 		
 		return mv;
 	}
 	
-	@PostMapping("/search.do")
-	public ModelAndView search(SearchDTO sto, Criteria cri, HashMap<String, Object> map) {
-		logger.info(">>> search.do " + sto.toString());
-		
-		map.put("search", sto);
-		map.put("cri", cri);
-		
-		List<BoardDTO> SearchedBoardList = noticeService.getSearchedBoardList(map);	
-		ModelAndView mv = new ModelAndView();
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(noticeService.countBoardList(sto));
-		
-		if (sto.getKeyword() == "") {
-			mv.setViewName("redirect:/notice/list.do");		
-			logger.info(">>> search.do >> redirect:list.do");
-
-		} else {
-			mv.setViewName("/notice/boardList");	
-			mv.addObject("boardList", SearchedBoardList);
-			mv.addObject("pageMaker", pageMaker);
-			logger.info(">>> search.do " + sto.toString());
-		}
-		
-		return mv;
-	}
+	/*
+	 * @PostMapping("/search.do") public ModelAndView search(SearchDTO sto, Criteria
+	 * cri, HashMap<String, Object> map) { logger.info(">>> search.do " +
+	 * sto.toString());
+	 * 
+	 * map.put("search", sto); map.put("cri", cri);
+	 * 
+	 * List<BoardDTO> SearchedBoardList = noticeService.getSearchedBoardList(map);
+	 * ModelAndView mv = new ModelAndView();
+	 * 
+	 * PageMaker pageMaker = new PageMaker(); pageMaker.setCri(cri);
+	 * pageMaker.setTotalCount(noticeService.countBoardList(sto));
+	 * 
+	 * if (sto.getKeyword() == "") { mv.setViewName("redirect:/notice/list.do");
+	 * logger.info(">>> search.do >> redirect:list.do");
+	 * 
+	 * } else { mv.setViewName("/notice/boardList"); mv.addObject("boardList",
+	 * SearchedBoardList); mv.addObject("pageMaker", pageMaker);
+	 * logger.info(">>> search.do " + sto.toString()); }
+	 * 
+	 * return mv; }
+	 */
 	
 	// 게시물 상세보기 화면
 	@PostMapping("/detailContent.do")

@@ -33,11 +33,17 @@
 	</div>
 	<div class="container">
 	    <div class="top">
-	    	<form action='<c:url value="/notice/search.do" />' method="POST">	    	
-		    	<select name="search_option">
+	    	<%-- <form action='<c:url value="/notice/search.do" />' method="POST"> --%>	    	
+	    	<form action='<c:url value="/notice/list.do" />' method="GET">
+		    	<!-- <select name="search_option">
+		    		<option value="title">제목</option>
+		    		<option value="id">작성자</option>
+		    	</select> -->
+		    	<select name="searchType">
 		    		<option value="title">제목</option>
 		    		<option value="id">작성자</option>
 		    	</select>
+		    	
 		  		<input type="text" name="keyword" placeholder="검색어 입력" />
 		  		<input type="submit" value="검색"  />
 	    	</form>
@@ -81,15 +87,15 @@
       <div class="pagingBtn">
 		  <ul>
 		    <c:if test="${pageMaker.prev}">
-		    	<li><a href="list.do${pageMaker.makeQuery(pageMaker.startPage - 1)}">이전</a></li>
+		    	<li><a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 		    </c:if> 
 		
 		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-		    	<li><a href="list.do${pageMaker.makeQuery(idx)}">${idx}</a></li>
+		    	<li><a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
 		    </c:forEach>
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		    	<li><a href="list.do${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+		    	<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 		    </c:if> 
 		  </ul>
       </div>

@@ -1,14 +1,13 @@
 package com.joyandbiz.board.repository.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.domain.BoardDTO;
-import com.joyandbiz.board.domain.SearchDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 
 @Repository
@@ -20,14 +19,15 @@ public class NoticeMybatis implements NoticeRepository{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<BoardDTO> getBoardList(HashMap<String, Object> map) {
-		return sqlSession.selectList(NAMESPACE+"getBoardList", map);
+	public List<BoardDTO> getBoardList(SearchCriteria scri) {
+		return sqlSession.selectList(NAMESPACE+"getBoardList", scri);
 	}
 	
-	@Override
-	public List<BoardDTO> selectSearchBoard(HashMap<String, Object> map) {
-		return sqlSession.selectList(NAMESPACE+"selectSearchBoardList", map);
-	}
+	/*
+	 * @Override public List<BoardDTO> selectSearchBoard(HashMap<String, Object>
+	 * map) { return sqlSession.selectList(NAMESPACE+"selectSearchBoardList", map);
+	 * }
+	 */
 	
 	@Override
 	public BoardDTO getContentByCon_No(BoardDTO board) {
@@ -61,8 +61,7 @@ public class NoticeMybatis implements NoticeRepository{
 	}
 
 	@Override
-	public int countBoardList(SearchDTO sto) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne(NAMESPACE+"countBoardList", sto);
+	public int countBoardList(SearchCriteria scri) {
+		return sqlSession.selectOne(NAMESPACE+"countBoardList", scri);
 	}
 }
