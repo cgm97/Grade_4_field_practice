@@ -68,15 +68,22 @@
 	              	</tr>
 	        	</thead>
 	          	<tbody>
-	          	<c:forEach var="boardList" items="${boardList}">
+	          	<c:if test="${boardList ne null}">
+		          	<c:forEach var="boardList" items="${boardList}">
+		          		<tr>
+		              		<td style="text-align: center;"><c:out value="${boardList.get('RN')}" /></td>
+		                    <td><a href="javascript:content(${boardList.get('CON_NO')});"><c:out value="${boardList.get('CON_TITLE')}" /></a></td>
+		                    <td style="text-align: center;"><c:out value="${boardList.get('CON_ID')}" /></td>
+		                  	<td style="text-align: center;"><c:out value="${boardList.get('REG_DATE')}" /></td>
+		                 	<td style="text-align: center;"><c:out value="${boardList.get('READ_COUNT')}"/></td>
+		              	</tr>
+		          	</c:forEach>
+	          	</c:if>
+	          	<c:if test="${boardList.isEmpty()}">		       
 	          		<tr>
-	              		<td style="text-align: center;"><c:out value="${boardList.get('RN')}" /></td>
-	                    <td><a href="javascript:content(${boardList.get('CON_NO')});"><c:out value="${boardList.get('CON_TITLE')}" /></a></td>
-	                    <td style="text-align: center;"><c:out value="${boardList.get('CON_ID')}" /></td>
-	                  	<td style="text-align: center;"><c:out value="${boardList.get('REG_DATE')}" /></td>
-	                 	<td style="text-align: center;"><c:out value="${boardList.get('READ_COUNT')}"/></td>
+	              		<td colspan="5" style="text-align: center;">검색 데이터 없음</td>
 	              	</tr>
-	          	</c:forEach>
+	          	</c:if>
 	            </tbody>
 	      	</table>
 	    </div>
