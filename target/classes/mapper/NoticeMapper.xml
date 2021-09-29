@@ -24,35 +24,35 @@
                            row_number() over(order by ABS(CON_NO) DESC) as rNum
                        FROM contents_data WHERE CON_DIV = #{con_div} AND DEL_YN='N'
 			<if test= 'searchType eq "title" '>
-				 					AND CON_TITLE 
-				 					<include refid="search" />
-								</if>
+ 					AND CON_TITLE 
+ 					<include refid="search" />
+			</if>
 			<if test= 'searchType eq "id" '>
 			 		AND CON_ID
 			 		<include refid="search" />
-				</if>	
+			</if>	
 			 )A	
 			 WHERE rNum BETWEEN 
                   	 #{rowStart} AND #{rowEnd}
-                    	order by ABS(CON_NO) DESC	  	 
+                    	ORDER BY ABS(CON_NO) DESC
     </select>
    
      <!-- 게시물 상세보기 -->
-     <select id="getContentByCon_No" parameterType="boardDTO" resultType="boardDTO">
+     <select id="getContentByCon_No" parameterType="HASHMAP" resultType="HASHMAP">
 	  	 SELECT CON_NO, CON_TITLE, CON_TXT	 		
 	  	 	FROM CONTENTS_DATA 
 	  	 		WHERE <include refid="div_no" />
     </select>
    
     <!-- 조회수 카운팅 -->
-    <update id="plusReadCount" parameterType="boardDTO">
+    <update id="plusReadCount" parameterType="HASHMAP">
     	UPDATE CONTENTS_DATA 
     		SET READ_COUNT = READ_COUNT+1 
     			WHERE <include refid="div_no" />
     </update>
    
     <!-- 글쓰기 -->
-    <insert id="insertBoard" parameterType="boardDTO">
+    <insert id="insertBoard" parameterType="HASHMAP">
    		INSERT INTO CONTENTS_DATA (CON_DIV, CON_NO, CON_TITLE, CON_TXT, CON_ID, PASSWORD, REG_IP) 
    			 VALUES (#{con_div}, (SELECT NVL(MAX(ABS(CON_NO))+1,1) 
    			 	FROM CONTENTS_DATA), #{con_title}, #{con_txt}, #{con_id}, #{password}, #{reg_ip})
@@ -66,13 +66,13 @@
    	</select>
    	
    	<!-- 글 수정 -->
-	<update id="updateBoard" parameterType="boardDTO" >
+	<update id="updateBoard" parameterType="HASHMAP" >
 		UPDATE CONTENTS_DATA 
 			SET CON_TITLE = #{con_title}, CON_TXT = #{con_txt}, UPD_DATE = SYSDATE
 				WHERE <include refid="div_no" />
 	</update>
 	<!-- 글 삭제  DELETE 구문 사용이 아닌 UPDATE 사용 , 게시물 삭제 해도 데이터 남기기 위함-->
-	<update id="deleteBoard" parameterType="boardDTO">
+	<update id="deleteBoard" parameterType="HASHMAP">
 <!-- 	DELETE 
 			FROM CONTENTS_DATA
 				WHERE CON_DIV = #{con_div} AND CON_NO = #{con_no} 	 -->

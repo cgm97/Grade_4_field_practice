@@ -35,19 +35,31 @@ table {
 	height: 25px;
 	margin: 10px 0 0 0;
 }	
-.pagingBtn{
+.pagination{
 	display: inline-block;
 	text-align: center; 
 }
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius:50%;
+}
+
+.pagination a.active {
+  background-color: tomato;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: silver;}
+
 .writeBtn{
 	float:right;
 	display: inline-block;
 	text-align: right;
 }
-li{
-	list-style: none;
-	float: left;
-	padding: 6px;
-}
+
 a:link { color: blue; text-decoration: none;}
 a:hover { color: red; text-decoration: none;}

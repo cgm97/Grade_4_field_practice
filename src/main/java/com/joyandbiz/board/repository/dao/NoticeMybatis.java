@@ -1,5 +1,6 @@
 package com.joyandbiz.board.repository.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -30,33 +31,33 @@ public class NoticeMybatis implements NoticeRepository{
 	 */
 	
 	@Override
-	public BoardDTO getContentByCon_No(BoardDTO board) {
+	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board) {
 		return sqlSession.selectOne(NAMESPACE+"getContentByCon_No", board);
 	}
 
 	@Override
-	public int plusReadCount(BoardDTO board) {
+	public int plusReadCount(HashMap<String, Object> board) {
 		logger.info(">>> 게시판 조회수 카운팅");
 		return sqlSession.update(NAMESPACE+"plusReadCount", board);	
 	}
 
 	@Override
-	public int insertBoard(BoardDTO board) {
+	public int insertBoard(HashMap<String, Object> board) {
 		return sqlSession.insert(NAMESPACE+"insertBoard", board);
 	}
 
 	@Override
-	public boolean isCheckIdentify(BoardDTO board) {
+	public boolean isCheckIdentify(HashMap<String, Object> board) {
 		return sqlSession.selectOne(NAMESPACE+"isCheckIdentify", board);
 	}
 
 	@Override
-	public int updateBoard(BoardDTO board) {
+	public int updateBoard(HashMap<String, Object> board) {
 		return sqlSession.update(NAMESPACE+"updateBoard", board);
 	}
 
 	@Override
-	public int deleteBoard(BoardDTO board) {
+	public int deleteBoard(HashMap<String, Object> board) {
 		return sqlSession.delete(NAMESPACE+"deleteBoard", board);
 	}
 
