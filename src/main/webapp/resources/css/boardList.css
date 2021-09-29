@@ -22,7 +22,7 @@ table {
   }
 
 .title{
-	margin: 0 0 50px 0;
+	margin: 0 0 10px 0;
 	
 }
 .top{
@@ -40,20 +40,33 @@ table {
 	text-align: center; 
 }
 
-.pagination a {
+.pagination ul{
+  display: inline-block;
   color: black;
   float: left;
   padding: 8px 16px;
-  text-decoration: none;
+  list-style: none;
   border-radius:50%;
 }
 
-.pagination a.active {
-  background-color: tomato;
+.pagination li{
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius:50%;
+}
+
+.pagination a {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.pagination li.active {
+  background-color: #7b7b7b;
   color: white;
 }
 
-.pagination a:hover:not(.active) {background-color: silver;}
+.pagination li:hover:not(.active) {background-color: silver;}
 
 .writeBtn{
 	float:right;
@@ -61,5 +74,5 @@ table {
 	text-align: right;
 }
 
-a:link { color: blue; text-decoration: none;}
-a:hover { color: red; text-decoration: none;}
+ li:link { color: blue; text-decoration: none;}
+ li:hover { color: red; text-decoration: none;}

@@ -39,7 +39,8 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		BoardListMap = noticeService.getBoardList(scri);
 		
-		mv.setViewName("/notice/boardList");
+		mv.setViewName("/notice/boardList");		
+		
 		mv.addObject("boardList", BoardListMap.get("BoardList"));
 		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
 		mv.addObject("searchData", BoardListMap.get("searchData"));

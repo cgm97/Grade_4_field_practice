@@ -81,7 +81,7 @@
 	          	</c:if>
 	          	<c:if test="${boardList.isEmpty()}">		       
 	          		<tr>
-	              		<td colspan="5" style="text-align: center;">검색 데이터 없음</td>
+	              		<td colspan="5" style="text-align: center;">검색된 데이터 없음</td>
 	              	</tr>
 	          	</c:if>
 	            </tbody>
@@ -92,17 +92,21 @@
     <div class='bottom'>
     
       <div class="pagination">
-	    <c:if test="${pageMaker.prev}">
-			<a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a>
-	    </c:if> 
-	
-	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-			<a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a>
-	    </c:forEach>
-	
-	    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-			<a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a>
-	    </c:if> 
+	      <ul>
+		    <c:if test="${pageMaker.prev}">
+				<li> <a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+		    </c:if> 
+			
+			
+			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+					<li <c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>> <a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+			    </c:forEach>		
+			
+		
+		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+		    </c:if> 
+		  </ul>
       </div>
       
       <div class="writeBtn"><input class="button" type="button" onclick="key(1);" value="글쓰기" /></div>
