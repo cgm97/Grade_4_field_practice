@@ -3,10 +3,9 @@ package com.joyandbiz.board.repository;
 import java.util.HashMap;
 import java.util.List;
 import com.joyandbiz.board.SearchCriteria;
-import com.joyandbiz.board.domain.BoardDTO;
 
 public interface NoticeRepository {
-	public List<BoardDTO> getBoardList(SearchCriteria scri);
+	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri);
 
 	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board);
 

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.joyandbiz.board.PageMaker;
 import com.joyandbiz.board.SearchCriteria;
-import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.service.NoticeService;
 
 @RequestMapping("/notice")
@@ -43,14 +42,14 @@ public class NoticeController {
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(noticeService.countBoardList(scri));
 		
-		List<BoardDTO> BoardList = noticeService.getBoardList(scri);	
+		List<HashMap<String, Object>> BoardList = noticeService.getBoardList(scri);	
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("/notice/boardList");
 		mv.addObject("boardList", BoardList);
 		mv.addObject("pageMaker", pageMaker);
 		
-		logger.info(">>> list.do");
+		logger.info(">>> list.do"+BoardList.toString());
 		
 		return mv;
 	}

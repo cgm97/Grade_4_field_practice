@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.joyandbiz.board.SearchCriteria;
-import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 
 @Repository
@@ -20,7 +19,7 @@ public class NoticeMybatis implements NoticeRepository{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<BoardDTO> getBoardList(SearchCriteria scri) {
+	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri) {
 		return sqlSession.selectList(NAMESPACE+"getBoardList", scri);
 	}
 	

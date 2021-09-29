@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.joyandbiz.board.IPConfig;
 import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.domain.BoardDTO;
@@ -37,7 +35,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public List<BoardDTO> getBoardList(SearchCriteria scri) {
+	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri) {
 		logger.info(">>> 게시판 리스트 가져오기");
 		
 		setScriCon_div(scri);

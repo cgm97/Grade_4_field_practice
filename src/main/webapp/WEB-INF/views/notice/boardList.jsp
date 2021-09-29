@@ -70,11 +70,11 @@
 	          	<tbody>
 	          	<c:forEach var="boardList" items="${boardList}">
 	          		<tr>
-	              		<td style="text-align: center;"><c:out value="${boardList.getRn()}" /></td>
-	                    <td><a href="javascript:content(${boardList.getCon_no()});"><c:out value="${boardList.getCon_title()}" /></a></td>
-	                    <td style="text-align: center;"><c:out value="${boardList.getCon_id()}" /></td>
-	                  	<td style="text-align: center;"><c:out value="${boardList.getReg_date()}" /></td>
-	                 	<td style="text-align: center;"><c:out value="${boardList.getRead_count()}"/></td>
+	              		<td style="text-align: center;"><c:out value="${boardList.get('RN')}" /></td>
+	                    <td><a href="javascript:content(${boardList.get('CON_NO')});"><c:out value="${boardList.get('CON_TITLE')}" /></a></td>
+	                    <td style="text-align: center;"><c:out value="${boardList.get('CON_ID')}" /></td>
+	                  	<td style="text-align: center;"><c:out value="${boardList.get('REG_DATE')}" /></td>
+	                 	<td style="text-align: center;"><c:out value="${boardList.get('READ_COUNT')}"/></td>
 	              	</tr>
 	          	</c:forEach>
 	            </tbody>
