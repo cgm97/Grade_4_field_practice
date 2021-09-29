@@ -60,8 +60,8 @@ public class NoticeMybatis implements NoticeRepository{
 		return sqlSession.delete(NAMESPACE+"deleteBoard", board);
 	}
 
-	@Override
-	public int countBoardList(SearchCriteria scri) {
-		return sqlSession.selectOne(NAMESPACE+"countBoardList", scri);
-	}
+	/*
+	 * @Override public int countBoardList(SearchCriteria scri) { return
+	 * sqlSession.selectOne(NAMESPACE+"countBoardList", scri); }
+	 */
 }

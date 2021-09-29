@@ -21,5 +21,5 @@ public interface NoticeRepository {
 
 //	public List<BoardDTO> selectSearchBoard(HashMap<String, Object> map);
 	
-	public int countBoardList(SearchCriteria scri);
+//	public int countBoardList(SearchCriteria scri);
 }

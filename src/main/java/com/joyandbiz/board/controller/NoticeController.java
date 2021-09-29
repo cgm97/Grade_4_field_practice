@@ -36,20 +36,16 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/list.do")
-	public ModelAndView list(SearchCriteria scri) {
+	public ModelAndView list(HashMap<String, Object> BoardListMap, SearchCriteria scri) {		
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(scri);
-		pageMaker.setTotalCount(noticeService.countBoardList(scri));
-		
-		List<HashMap<String, Object>> BoardList = noticeService.getBoardList(scri);	
 		ModelAndView mv = new ModelAndView();
+		BoardListMap = noticeService.getBoardList(scri);
 		
 		mv.setViewName("/notice/boardList");
-		mv.addObject("boardList", BoardList);
-		mv.addObject("pageMaker", pageMaker);
+		mv.addObject("boardList", BoardListMap.get("BoardList"));
+		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
 		
-		logger.info(">>> list.do"+BoardList.toString());
+		logger.info(">>> list.do");
 		
 		return mv;
 	}

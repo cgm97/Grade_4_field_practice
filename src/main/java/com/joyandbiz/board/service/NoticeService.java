@@ -1,13 +1,12 @@
 package com.joyandbiz.board.service;
 
 import java.util.HashMap;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import com.joyandbiz.board.SearchCriteria;
 
 public interface NoticeService {
 	
-	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri);
+	public HashMap<String, Object> getBoardList(SearchCriteria scri);
 		
 	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board);
 
@@ -21,6 +20,6 @@ public interface NoticeService {
 
 //	public List<BoardDTO> getSearchedBoardList(HashMap<String, Object> map);
 	
-	public int countBoardList(SearchCriteria scri);
+//	public int countBoardList(SearchCriteria scri);
 
 }
