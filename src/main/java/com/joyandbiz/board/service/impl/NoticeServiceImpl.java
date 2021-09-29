@@ -49,7 +49,10 @@ public class NoticeServiceImpl implements NoticeService {
 		HashMap<String, Object> BoardListMap = new HashMap<String, Object>();
 		List<HashMap<String, Object>> BoardList = dao.getBoardList(scri);
 		// oracle 데이터 형식 때문에 TotalCount (게시물 총 개수) 정수로 변환
-		int totalCount = Integer.parseInt(String.valueOf(BoardList.get(0).get("TOTALCOUNT"))); 
+		int totalCount = 0;
+		if (BoardList.size() != 0) {
+			totalCount = Integer.parseInt(String.valueOf(BoardList.get(0).get("TOTALCOUNT"))); 	
+		}
 		
 		PageMaker pageMaker = new PageMaker();
 		
@@ -58,7 +61,8 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		BoardListMap.put("BoardList", BoardList);
 		BoardListMap.put("pageMaker", pageMaker);
-
+		BoardListMap.put("searchData", scri);
+		
 		logger.info(">>> result Map : " + BoardListMap.get("BoardList").toString());
 		logger.info(">>> result 게시물 총 갯수 : " + totalCount);
 		

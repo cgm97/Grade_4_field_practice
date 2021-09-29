@@ -40,11 +40,11 @@
 		    		<option value="id">작성자</option>
 		    	</select> -->
 		    	<select name="searchType">
-		    		<option value="title">제목</option>
-		    		<option value="id">작성자</option>
+		    		<option value="title" <c:if test="${searchData.getSearchType() eq 'title'}"> selected </c:if>>제목</option>
+		    		<option value="id" <c:if test="${searchData.getSearchType() eq 'id'}"> selected </c:if>>작성자</option>
 		    	</select>
 		    	
-		  		<input type="text" name="keyword" placeholder="검색어 입력" />
+		  		<input type="text" name="keyword" placeholder="검색어 입력" value="${searchData.getKeyword()}"/> 
 		  		<input type="submit" value="검색"  />
 	    	</form>
 	    </div>
