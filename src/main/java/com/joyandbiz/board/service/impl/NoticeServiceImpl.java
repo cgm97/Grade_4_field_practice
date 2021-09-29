@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.joyandbiz.board.IPConfig;
 import com.joyandbiz.board.PageMaker;
 import com.joyandbiz.board.SearchCriteria;
-import com.joyandbiz.board.domain.BoardDTO;
 import com.joyandbiz.board.repository.NoticeRepository;
 import com.joyandbiz.board.service.NoticeService;
 
@@ -44,6 +43,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public HashMap<String, Object> getBoardList(SearchCriteria scri) {
 		logger.info(">>> 게시판 리스트 가져오기");
+
 		setScriCon_div(scri);
 		
 		HashMap<String, Object> BoardListMap = new HashMap<String, Object>();
