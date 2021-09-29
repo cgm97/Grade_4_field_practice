@@ -38,7 +38,7 @@
 <body>	
 	<div class="title">
 		<div class="back">
-			<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>		
+			<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board/notice/'"/>		
 		</div>
 		<div>
 			<label style="font:45px bold;">게시물 상세보기</label>		

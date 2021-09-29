@@ -4,6 +4,7 @@
 <head>
 	<title>업무 관리 게시판</title>
 	<link href="<c:url value="/css/boardList.css" />" rel='stylesheet' />
+	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <script>
 	var content = function(data){
@@ -29,6 +30,7 @@
 </script>
 <body>
 	<div class="title">
+		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board/'"/>		
 		<label style="font:45px bold;">공지사항</label>
 	</div>
 	<div class="container">
