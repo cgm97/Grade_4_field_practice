@@ -44,25 +44,24 @@ table {
   display: inline-block;
   color: black;
   float: left;
-  padding: 8px 16px;
   list-style: none;
   border-radius:50%;
 }
 
 .pagination li{
   display: inline-block;
-  padding: 5px 12px;
+  padding: 2px 8px;
   border-radius:50%;
 }
 
 .pagination a {
   text-decoration: none;
   display: block;
-  padding: 10px;
+  padding: 8px;
 }
 
 .pagination li.active {
-  background-color: #7b7b7b;
+  background-color: tomato;
   color: white;
 }
 

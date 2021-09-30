@@ -96,7 +96,7 @@
       <div class="pagination">
 	      <ul>
 		    <c:if test="${pageMaker.prev}">
-				<li> <a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+				<li> <a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 		    </c:if> 
 			
 			
@@ -106,7 +106,7 @@
 			
 		
 		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+				<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
 		    </c:if> 
 		  </ul>
       </div>
