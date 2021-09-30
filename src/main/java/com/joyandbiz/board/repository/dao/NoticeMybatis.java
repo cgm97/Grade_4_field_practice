@@ -19,8 +19,8 @@ public class NoticeMybatis implements NoticeRepository{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri) {
-		return sqlSession.selectList(NAMESPACE+"getBoardList", scri);
+	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> board) {
+		return sqlSession.selectList(NAMESPACE+"getBoardList", board);
 	}
 	
 	/*

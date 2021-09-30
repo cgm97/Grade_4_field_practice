@@ -33,17 +33,34 @@ public class NoticeController {
 		return mv;
 	}
 	
+//	@GetMapping("/list.do")
+//	public ModelAndView list(HashMap<String, Object> BoardListMap, SearchCriteria scri) {		
+//		
+//		ModelAndView mv = new ModelAndView();
+//		BoardListMap = noticeService.getBoardList(scri);
+//		
+//		mv.setViewName("/notice/boardList");		
+//		
+//		mv.addObject("boardList", BoardListMap.get("BoardList"));
+//		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
+//		mv.addObject("searchData", BoardListMap.get("searchData"));
+//		
+//		return mv;
+//	}
+	
 	@GetMapping("/list.do")
-	public ModelAndView list(HashMap<String, Object> BoardListMap, SearchCriteria scri) {		
+	public ModelAndView list(@RequestParam HashMap<String, Object> BoardListMap) {		
+		logger.info(">>> list.d0 : " + BoardListMap.toString());
 		
 		ModelAndView mv = new ModelAndView();
-		BoardListMap = noticeService.getBoardList(scri);
+		BoardListMap = noticeService.getBoardList(BoardListMap);
 		
 		mv.setViewName("/notice/boardList");		
 		
 		mv.addObject("boardList", BoardListMap.get("BoardList"));
 		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
 		mv.addObject("searchData", BoardListMap.get("searchData"));
+		logger.info(BoardListMap.get("searchData").toString());
 		
 		return mv;
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 import com.joyandbiz.board.SearchCriteria;
 
 public interface NoticeRepository {
-	public List<HashMap<String, Object>> getBoardList(SearchCriteria scri);
+	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> board);
 
 	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board);
 

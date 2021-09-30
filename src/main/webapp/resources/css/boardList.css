@@ -4,6 +4,7 @@ body{
  width:70%;
  margin: 0 auto;
  padding: 130px;
+ background-color: #eeeeee;
 }
 .button{
 	border:1x solid #0099FF;    /*---테두리 정의---*/
@@ -61,7 +62,7 @@ table {
 }
 
 .pagination li.active {
-  background-color: tomato;
+  background-color: silver;
   color: white;
 }
 

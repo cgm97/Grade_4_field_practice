@@ -31,7 +31,7 @@
 <body>
 	<div class="title">
 		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board/'"/>		
-		<label style="font:45px bold;">공지사항</label>
+		<label style="font:45px bold;">공지사항 </label>
 	</div>
 	<div class="container">
 	    <div class="top">
@@ -42,11 +42,11 @@
 		    		<option value="id">작성자</option>
 		    	</select> -->
 		    	<select name="searchType">
-		    		<option value="title" <c:if test="${searchData.getSearchType() eq 'title'}"> selected </c:if>>제목</option>
-		    		<option value="id" <c:if test="${searchData.getSearchType() eq 'id'}"> selected </c:if>>작성자</option>
+		    		<option value="title" <c:if test="${searchData.get('searchType') eq 'title' }"> selected </c:if>>제목</option>
+		    		<option value="id" <c:if test="${searchData.get('searchType') eq 'id'}"> selected </c:if>>작성자</option>
 		    	</select>
 		    	
-		  		<input type="text" name="keyword" placeholder="검색어 입력" value="${searchData.getKeyword()}"/> 
+		  		<input type="text" name="keyword" placeholder="검색어 입력" value="${searchData.get('keyword')}"/> 
 		  		<input type="submit" value="검색"  />
 	    	</form>
 	    </div>

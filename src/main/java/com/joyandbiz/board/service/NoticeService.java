@@ -6,8 +6,10 @@ import com.joyandbiz.board.SearchCriteria;
 
 public interface NoticeService {
 	
-	public HashMap<String, Object> getBoardList(SearchCriteria scri);
-		
+//	public HashMap<String, Object> getBoardList(SearchCriteria scri);		
+	public HashMap<String, Object> getBoardList(HashMap<String, Object> board);
+	
+	
 	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board);
 
 	public int writeBoard(HttpServletRequest request, HashMap<String, Object> board);
