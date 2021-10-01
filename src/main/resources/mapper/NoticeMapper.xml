@@ -33,9 +33,9 @@
 			 		<include refid="search" />
 			</if>	
 			 )A	
-			 <!-- WHERE rNum BETWEEN 
+			 WHERE rNum BETWEEN 
                   	 #{rowStart} AND #{rowEnd}
-                    	ORDER BY ABS(CON_NO) DESC -->
+                    	ORDER BY ABS(CON_NO) DESC
     </select>
    
      <!-- 게시물 상세보기 -->
@@ -60,7 +60,7 @@
     </insert>
    
     <!-- 본인 인증 -->
-    <select id="isCheckIdentify" parameterType="boardDTO" resultType="boolean">
+    <select id="isCheckIdentify" parameterType="HASHMAP" resultType="boolean">
    		SELECT CASE WHEN count(*)=1 THEN 1 ELSE 0 END
    			FROM CONTENTS_DATA
    				WHERE <include refid="div_no" /> AND CON_ID = #{con_id} AND PASSWORD = #{password}
@@ -102,7 +102,7 @@
                     	 order by ABS(CON_NO) DESC
 	</select> -->
 	<!-- 게시판 목록 총 갯수 조회 -->
-	<select id="countBoardList" parameterType="Scri" resultType="integer">
+	<select id="countBoardList" parameterType="HASHMAP" resultType="integer">
 		SELECT COUNT(*)
 			FROM CONTENTS_DATA
 				WHERE CON_DIV = #{con_div} AND DEL_YN='N'

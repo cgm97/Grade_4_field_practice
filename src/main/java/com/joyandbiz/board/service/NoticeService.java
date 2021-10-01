@@ -2,7 +2,6 @@ package com.joyandbiz.board.service;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
-import com.joyandbiz.board.SearchCriteria;
 
 public interface NoticeService {
 	

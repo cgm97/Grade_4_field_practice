@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.service.NoticeService;
 
 @RequestMapping("/notice")
@@ -27,7 +26,7 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView(); 
 
-		mv.setViewName("redirect:/notice/list.do");
+		mv.setViewName("redirect:/notice/list.do?page=1");
 		logger.info(">>> notice / ");
 		
 		return mv;
@@ -58,9 +57,10 @@ public class NoticeController {
 		mv.setViewName("/notice/boardList");		
 		
 		mv.addObject("boardList", BoardListMap.get("BoardList"));
-		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
-		mv.addObject("searchData", BoardListMap.get("searchData"));
-		logger.info(BoardListMap.get("searchData").toString());
+//		mv.addObject("pageMaker", BoardListMap.get("pageMaker"));
+		mv.addObject("SearchAndPagingData", BoardListMap.get("SearchAndPagingData"));
+		
+		logger.info(BoardListMap.get("SearchAndPagingData").toString());
 		
 		return mv;
 	}

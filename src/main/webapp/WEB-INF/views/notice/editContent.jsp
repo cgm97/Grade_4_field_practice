@@ -14,7 +14,7 @@
 				 <c:if test="${boardInfo.get('key') eq 2}">"<c:url value="/notice/edit.do" />"</c:if> method="POST">
 	  	<div class="title">
 		  	<div class="back">
-		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board'"/>
+		  		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="history.back()"/>
 		  	</div>
 		  	<div>
 			  	<c:if test="${boardInfo.get('key') eq 1}">

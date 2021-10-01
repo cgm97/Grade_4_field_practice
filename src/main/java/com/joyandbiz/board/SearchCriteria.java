@@ -4,8 +4,12 @@ public class SearchCriteria extends Criteria{
 	
 	private String searchType = "";
 	private String keyword = "";
-	private String con_div;
+	/* private String con_div; */
 	
+	public SearchCriteria(String searchType, String keyword) {
+		this.searchType = searchType;
+		this.keyword = keyword;
+	}
 	public String getSearchType() {
 		return searchType;
 	}
@@ -19,12 +23,10 @@ public class SearchCriteria extends Criteria{
 		this.keyword = keyword;
 	}
 	
-	public String getCon_div() {
-		return con_div;
-	}
-	public void setCon_div(String con_div) {
-		this.con_div = con_div;
-	}
+	/*
+	 * public String getCon_div() { return con_div; } public void setCon_div(String
+	 * con_div) { this.con_div = con_div; }
+	 */
 	@Override
 	public String toString() {
 		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + "]";

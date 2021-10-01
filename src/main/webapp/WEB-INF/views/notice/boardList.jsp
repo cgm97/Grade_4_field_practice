@@ -27,6 +27,16 @@
 	    form.method = "POST";
 	    form.submit();
 	};
+	var paging = function(page){
+
+		var form = document.paging;
+		form.page.value = page; // form 하나 쓰기위해 지정함
+		form.searchType.value = "${SearchAndPagingData.get('searchType')}";
+		form.keyword.value = "${SearchAndPagingData.get('keyword')}";
+	    form.action = "<c:url value='/notice/list.do' />";
+	    form.method = "GET";
+	    form.submit();
+	};
 </script>
 <body>
 	<div class="title">
@@ -42,11 +52,12 @@
 		    		<option value="id">작성자</option>
 		    	</select> -->
 		    	<select name="searchType">
-		    		<option value="title" <c:if test="${searchData.get('searchType') eq 'title' }"> selected </c:if>>제목</option>
-		    		<option value="id" <c:if test="${searchData.get('searchType') eq 'id'}"> selected </c:if>>작성자</option>
+		    		<option value="title" <c:if test="${SearchAndPagingData.get('searchType') eq 'title' }"> selected </c:if>>제목</option>
+		    		<option value="id" <c:if test="${SearchAndPagingData.get('searchType') eq 'id'}"> selected </c:if>>작성자</option>
 		    	</select>
 		    	
-		  		<input type="text" name="keyword" placeholder="검색어 입력" value="${searchData.get('keyword')}"/> 
+		  		<input type="text" name="keyword" placeholder="검색어 입력" value="${SearchAndPagingData.get('keyword')}"/> 
+		  		    	<input type="hidden" name="page" value="1"/>
 		  		<input type="submit" value="검색"  />
 	    	</form>
 	    </div>
@@ -92,30 +103,36 @@
    </div>
    
     <div class='bottom'>
-    
+    <c:if test="${!boardList.isEmpty()}">	
       <div class="pagination">
 	      <ul>
-		    <c:if test="${pageMaker.prev}">
-				<li> <a href="list.do${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
+		    <c:if test="${SearchAndPagingData.prev}">
+				<li> <a href="javascript:paging(${SearchAndPagingData.startPage - 1})">이전</a></li>
 		    </c:if> 
 			
 			
-			    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-					<li <c:out value="${pageMaker.cri.page == idx ? 'class=active' : '' }"/>> <a href="list.do${pageMaker.makeSearch(idx)}">${idx}</a></li>
+			    <c:forEach begin="${SearchAndPagingData.get('startPage')}" end="${SearchAndPagingData.get('endPage')}" var="idx">
+					<li <c:out value="${SearchAndPagingData.page == idx ? 'class=active' : '' }"/>> <a href="javascript:paging(${idx});">${idx}</a></li>
 			    </c:forEach>		
 			
 		
-		    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<li><a href="list.do${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
+		    <c:if test="${SearchAndPagingData.next && SearchAndPagingData.endPage > 0}">
+				<li><a href="javascript:paging(${SearchAndPagingData.endPage + 1})">다음</a></li>
 		    </c:if> 
 		  </ul>
       </div>
-      
+     </c:if>
       <div class="writeBtn"><input class="button" type="button" onclick="key(1);" value="글쓰기" /></div>
     </div>
     <form name="content"> <!-- 상세보기 와 글쓰기 판단 후 POST 하기 위한 FORM -->
     	<input type="hidden" name="con_no"/>
     	<input type="hidden" name="key"/>
+    </form>
+    
+    <form name="paging"> <!-- 상세보기 와 글쓰기 판단 후 POST 하기 위한 FORM -->
+    	<input type="hidden" name="page"/>
+    	<input type="hidden" name="searchType"/>
+    	<input type="hidden" name="keyword"/>
     </form>
 </body>
 </html>
