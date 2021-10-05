@@ -1,6 +1,6 @@
 package com.joyandbiz.board;
 
-public class Criteria {
+public class Criteria { //»ç¿ë x
 	private int page;
 	private int perPageNum;
 	private int rowStart;

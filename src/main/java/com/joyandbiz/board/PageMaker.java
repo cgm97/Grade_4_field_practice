@@ -3,7 +3,7 @@ package com.joyandbiz.board;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class PageMaker {
+public class PageMaker { // »ç¿ëx
 	
 	private int totalCount;
 	private int startPage;

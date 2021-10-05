@@ -2,7 +2,6 @@ package com.joyandbiz.board.repository;
 
 import java.util.HashMap;
 import java.util.List;
-import com.joyandbiz.board.SearchCriteria;
 
 public interface NoticeRepository {
 	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> board);

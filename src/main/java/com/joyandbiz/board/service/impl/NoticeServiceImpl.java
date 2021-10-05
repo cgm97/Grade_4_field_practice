@@ -7,11 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.joyandbiz.board.Criteria;
 import com.joyandbiz.board.IPConfig;
-import com.joyandbiz.board.PageMaker;
-import com.joyandbiz.board.SearchCriteria;
 import com.joyandbiz.board.repository.NoticeRepository;
 import com.joyandbiz.board.service.NoticeService;
 
@@ -22,12 +18,12 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeRepository dao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private int page = 1;
-	private int perPageNum = 5;
-	private int displayPageNum = 5;
-	private int startPage;
-	private int endPage;
-	private int rowStart;
+	private int page = 1; // 현재페이지
+	private int perPageNum = 5; // 한줄에 표시될 페이지 수
+	private int displayPageNum = 10; // 화면에 표시될 게시글 수
+	private int startPage; // 한줄에 표시되는 페이지 범위
+	private int endPage;  
+	private int rowStart; // DB에 전송될 게시글 범위
 	private int rowEnd;
 	private boolean prev;
 	private boolean next;
@@ -114,12 +110,12 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		setCon_div(board);
 		
-		// DB에 들어갈 페이징 시작과 끝 숫자 계산
+		// DB에 들어갈 게시글 시작과 끝 ( 범위  ) 숫자 계산
 		board = calRowStartEnd(board);
 		
 		logger.info(">>> 게시판 리스트 가져오기" + board.toString());
 		
-		
+		 
 		/*
 		 * 검색 키워드 처리하기 위해 scri에 주입 Criteria scri = new
 		 * SearchCriteria(String.valueOf(board.get("searchType")),

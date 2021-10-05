@@ -1,6 +1,6 @@
 package com.joyandbiz.board.domain;
 
-public class BoardDTO {
+public class BoardDTO { // 사용x HashMap으로 전환
 	private String con_div;
 	private String con_no;
 	private String con_title;

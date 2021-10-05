@@ -1,6 +1,6 @@
 package com.joyandbiz.board;
 
-public class SearchCriteria extends Criteria{
+public class SearchCriteria extends Criteria{ // »ç¿ëx
 	
 	private String searchType = "";
 	private String keyword = "";
