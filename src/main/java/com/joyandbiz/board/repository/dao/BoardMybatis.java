@@ -7,14 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.joyandbiz.board.repository.NoticeRepository;
+import com.joyandbiz.board.repository.BoardRepository;
 
 @Repository
-public class NoticeMybatis implements NoticeRepository{
+public class BoardMybatis implements BoardRepository{
 
 	@Autowired
 	private SqlSession sqlSession;
-	private static final String NAMESPACE = "noticeMapper.";
+	private static final String NAMESPACE = "boardMapper.";
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override

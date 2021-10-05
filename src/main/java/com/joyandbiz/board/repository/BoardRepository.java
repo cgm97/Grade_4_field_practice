@@ -3,7 +3,7 @@ package com.joyandbiz.board.repository;
 import java.util.HashMap;
 import java.util.List;
 
-public interface NoticeRepository {
+public interface BoardRepository {
 	public List<HashMap<String, Object>> getBoardList(HashMap<String, Object> board);
 
 	public HashMap<String, Object> getContentByCon_No(HashMap<String, Object> board);

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="noticeMapper">
+<mapper namespace="boardMapper">
  
     <!-- 게시판 전체 목록 및 검색 목록 조회 -->
     <select id="getBoardList"  parameterType="HASHMAP" resultType="HashMap">

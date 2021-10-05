@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="com.joyandbiz.board.controller.NoticeController" %>
-<c:set var="TARGET" value="${NoticeController.TARGET}" />
+<%@ page import="com.joyandbiz.board.controller.FreeController" %>
+<c:set var="TARGET" value="${FreeController.TARGET}" />
 
 <!DOCTYPE html>
 <html>

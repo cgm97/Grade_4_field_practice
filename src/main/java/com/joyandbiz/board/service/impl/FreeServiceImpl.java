@@ -12,7 +12,7 @@ import com.joyandbiz.board.repository.BoardRepository;
 import com.joyandbiz.board.service.BoardService;
 
 @Service
-public class NoticeServiceImpl implements BoardService {
+public class FreeServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardRepository dao;
@@ -28,51 +28,13 @@ public class NoticeServiceImpl implements BoardService {
 	private boolean prev;
 	private boolean next;
 	private int totalCount = 0;
-
-	/*
-	 * public BoardDTO setBoardCon_div(BoardDTO board) { // 게시판 구분자 지정 메소드
-	 * board.setCon_div("01"); logger.info(">>> 게시판 구분자 : Board 01 : 설정");
-	 * 
-	 * return board; }
-	 */
 	
 	public HashMap<String, Object> setCon_div(HashMap<String, Object> board) { // 게시판 구분자 지정 메소드
-		board.put("con_div", "01");
-		logger.info(">>> 게시판 구분자 HashMap 01 : 설정");
+		board.put("con_div", "02");
+		logger.info(">>> 게시판 구분자 HashMap 02 : 설정");
 		
 		return board;
 	}
-	/*
-	 * public SearchCriteria setScriCon_div(SearchCriteria scri) { // 게시판 검색 구분자 지정
-	 * 메소드 scri.setCon_div("01"); logger.info(">>> 게시판 구분자 Scri 01 : 설정");
-	 * 
-	 * return scri; }
-	 */
-	
-	/*
-	 * @Override public HashMap<String, Object> getBoardList(SearchCriteria scri) {
-	 * // Criteria 페이징 사용 logger.info(">>> 게시판 리스트 가져오기");
-	 * 
-	 * setScriCon_div(scri);
-	 * 
-	 * HashMap<String, Object> BoardListMap = new HashMap<String, Object>();
-	 * List<HashMap<String, Object>> BoardList = dao.getBoardList(scri); // oracle
-	 * 데이터 형식 때문에 TotalCount (게시물 총 개수) 정수로 변환 int totalCount = 0; if
-	 * (BoardList.size() != 0) { totalCount =
-	 * Integer.parseInt(String.valueOf(BoardList.get(0).get("TOTALCOUNT"))); }
-	 * 
-	 * PageMaker pageMaker = new PageMaker();
-	 * 
-	 * pageMaker.setCri(scri); pageMaker.setTotalCount(totalCount);
-	 * 
-	 * BoardListMap.put("BoardList", BoardList); BoardListMap.put("pageMaker",
-	 * pageMaker); BoardListMap.put("searchData", scri);
-	 * 
-	 * logger.info(">>> result Map : " + BoardListMap.get("BoardList").toString());
-	 * logger.info(">>> result 게시물 총 갯수 : " + totalCount);
-	 * 
-	 * return BoardListMap; }
-	 */
 	
 	public HashMap<String, Object> calRowStartEnd(HashMap<String, Object> board) {
 		// DB 페이지 별 검색을 위한 계산하는 Method
@@ -114,22 +76,7 @@ public class NoticeServiceImpl implements BoardService {
 		// DB에 들어갈 게시글 시작과 끝 ( 범위  ) 숫자 계산
 		board = calRowStartEnd(board);
 		
-		logger.info(">>> 게시판 리스트 가져오기" + board.toString());
-		
-		 
-		/*
-		 * 검색 키워드 처리하기 위해 scri에 주입 Criteria scri = new
-		 * SearchCriteria(String.valueOf(board.get("searchType")),
-		 * String.valueOf(board.get("keyword")));
-		 * 
-		 * if (board.get("page") != null) { // 1페이지가 아닐때만 클릭된 페이지 주입
-		 * scri.setPage(Integer.valueOf((String) board.get("page")));
-		 * scri.setPerPageNum(Integer.valueOf((String) board.get("perPageNum"))); }
-		 * 
-		 * board.put("scri", scri); // 검색 관련 데이터 HashMap에 저장
-		 */		
-		
-		
+		logger.info(">>> 게시판 리스트 가져오기" + board.toString());	
 		
 		// 검색되거나 전체 목록 게시물 리스트 불러오기
 		List<HashMap<String, Object>> BoardList = dao.getBoardList(board); 
@@ -149,16 +96,7 @@ public class NoticeServiceImpl implements BoardService {
 		result.put("next", next);
 		result.put("BoardList", BoardList);
 		result.put("SearchAndPagingData", board);
-		/*
-		 * DTO 페이징 int totalCount = 0; if (BoardList.size() != 0) { // 검색된 결과가 있을때만 총
-		 * 게시물 카운터 주입 totalCount =
-		 * Integer.parseInt(String.valueOf(BoardList.get(0).get("TOTALCOUNT"))); }
-		 * 
-		 * PageMaker pageMaker = new PageMaker();
-		 * 
-		 * // 페이징 관련 pageMaker.setCri(scri); pageMaker.setTotalCount(totalCount);
-		 * board.put("pageMaker", pageMaker);
-		 */
+		
 		 	
 		return result;
 	}
@@ -208,22 +146,4 @@ public class NoticeServiceImpl implements BoardService {
 		
 		return dao.deleteBoard(board);
 	}
-
-	/*
-	 * @Override public List<BoardDTO> getSearchedBoardList(HashMap<String, Object>
-	 * map) { SearchDTO sto = new SearchDTO(); sto = (SearchDTO) map.get("search");
-	 * sto.setCon_div("01"); map.put("search", sto); logger.info(">>> 글  검색");
-	 * 
-	 * return dao.selectSearchBoard(map); }
-	 */
-
-	/*
-	 * @Override public int countBoardList(SearchCriteria scri) {
-	 * logger.info(">>> 게시물 총 갯수 조회");
-	 * 
-	 * setScriCon_div(scri);
-	 * 
-	 * return dao.countBoardList(scri); }
-	 */
-	
 }

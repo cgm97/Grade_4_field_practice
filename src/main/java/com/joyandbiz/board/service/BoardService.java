@@ -3,7 +3,7 @@ package com.joyandbiz.board.service;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
-public interface NoticeService {
+public interface BoardService {
 	
 //	public HashMap<String, Object> getBoardList(SearchCriteria scri);		
 	public HashMap<String, Object> getBoardList(HashMap<String, Object> board);

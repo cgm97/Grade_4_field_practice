@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<%@ page import="com.joyandbiz.board.controller.NoticeController" %>
-<c:set var="TARGET" value="${NoticeController.TARGET}" />
+<%@ page import="com.joyandbiz.board.controller.FreeController" %>
+<c:set var="TARGET" value="${FreeController.TARGET}" />
 
 <html>
 <head>
@@ -44,7 +44,7 @@
 <body>
 	<div class="title">
 		<input class="fas fa-chevron-circle-left fa-3x" type="button" onclick="location.href='/board/'"/>		
-		<label style="font:45px bold;">공지사항 </label>
+		<label style="font:45px bold;">자유게시판 </label>
 	</div>
 	<div class="container">
 	    <div class="top">

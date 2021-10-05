@@ -10,6 +10,6 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mapper/NoticeMapper.xml"/>
+		<mapper resource="mapper/BoardMapper.xml"/>
 	</mappers>
 </configuration>

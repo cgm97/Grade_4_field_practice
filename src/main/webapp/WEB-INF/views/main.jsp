@@ -10,7 +10,8 @@
 <body>
 	<h1>업무 관리 프로그램</h1>
 	<ul>
-		<li><h3><a href="<c:url value="/notice/" />">공지사항</a></h3></li>	
+		<li><h3><a href="<c:url value="/notice/" />">공지사항</a></h3></li>
+		<li><h3><a href="<c:url value="/free/" />">자유게시판</a></h3></li>	
 	</ul>
 </body>
 </html>
