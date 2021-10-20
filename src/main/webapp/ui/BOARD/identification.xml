@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+    	<w2:type>DEFAULT</w2:type>
+        <w2:buildDate/>
+        <xf:model>
+        	<xf:instance>
+        		<data xmlns="" />
+        	</xf:instance>
+        	<w2:dataCollection baseNode="map">
+        		<w2:dataMap baseNode="map" id="identiInfo">
+        			<w2:keyInfo>
+        				<w2:key id="con_no" name="게시물번호" dataType="text"></w2:key>
+        				<w2:key id="con_id" name="작성자ID" dataType="text"></w2:key>
+        				<w2:key id="password" name="패스워드" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="contentDetail" style="">
+        			<w2:keyInfo>
+        				<w2:key dataType="text" id="CON_TITLE" name="제목"></w2:key>
+        				<w2:key dataType="text" id="CON_TXT" name="내용"></w2:key>
+        				<w2:key dataType="text" id="CON_NO" name="게시글번호"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="checkUser">
+        			<w2:keyInfo>
+        				<w2:key id="result" name="인증결과" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="resultData">
+        			<w2:keyInfo>
+        				<w2:key id="result" name="처리결과" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="del_Rq">
+        			<w2:keyInfo>
+        				<w2:key id="con_no" name="게시물 번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        	</w2:dataCollection>
+        	<w2:workflowCollection></w2:workflowCollection>
+        	<xf:submission id="identification_edit" ref="data:json,identiInfo" target="data:json,checkUser"
+        		action="/reference/checkIdentify.do" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="인증하는중..." ev:submit=""
+        		ev:submitdone="scwin.identification_edit_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="identification_del" ref="data:json,identiInfo" target="data:json,checkUser"
+        		action="/reference/checkIdentify.do" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="인증하는중..." ev:submit=""
+        		ev:submitdone="scwin.identification_del_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="delete" ref='data:json,{"id":"del_Rq","key":"con_no"}' target="data:json,resultData" action="/reference/delete.do" method="post" mediatype="application/json" encoding="UTF-8" instance=""
+        		replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="삭제중..." ev:submit="" ev:submitdone="scwin.delete_submitdone" ev:submiterror=""
+        		abortTrigger="">
+        	</xf:submission>
+        </xf:model>
+        <script type="text/javascript" lazy="false"><![CDATA[
+        
+	scwin.onpageload = function() {
+		// 수정/삭제 화면인지 판단하는 변수
+		var decideView =  $p.getParameter("popupParam");
+		// 게시물 고유번호 DataCollectio에 저장
+		identiInfo.set("con_no", decideView.con_no);
+		
+		if (decideView.keyValue == 1) {		
+			span_title.setValue("게시물 수정 본인 인증");
+			delete_btn.hide();
+			delete_cancel.hide();
+		} 
+		else {
+			span_title.setValue("게시물 삭제 본인 인증");
+			edit_btn.hide();
+			edit_cancel.hide();
+		}
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	// *****************수정*******************
+	scwin.edit_btn_onclick = function(e) {
+
+		$p.executeSubmission("identification_edit");
+	};
+
+	scwin.identification_edit_submitdone = function(e) {
+		if (checkUser.get("result") == true) {
+			alert("본인 인증 성공");
+			
+			var x2xPath = "/ui/BOARD/editContent.xml";
+			var options = 	{"keyValue" : 1, "con_no" : identiInfo.get("con_no")};
+			$w.url(x2xPath, { "spa" : true, "param" : options });
+			
+			$w.closePopup("popup1");	
+		}
+
+		else {
+			alert("인증 실패");
+		}
+	};
+	
+	// *****************삭제********************
+	scwin.delete_btn_onclick = function(e) {
+
+		$p.executeSubmission("identification_del");
+	};
+	
+	scwin.identification_del_submitdone = function(e) {
+		if (checkUser.get("result") == true) {
+			if (confirm("본인 인증 성공! 정말로 삭제 하시겠습니까?")) {
+				del_Rq.set("con_no", identiInfo.get("con_no"));
+				
+				$p.executeSubmission("delete");
+			} else {
+				alert("삭제를 취소하였습니다.");	
+					
+				$w.closePopup("popup1");	
+			}
+		}
+
+		else {
+			alert("인증 실패");
+		}
+	};
+	
+	scwin.delete_submitdone = function(e) {
+		if ( resultData.get("result") == 1 ) {
+			alert("삭제가 왼료 되었습니다.");	
+			// 메인화면으로 전환
+			var x2xPath = "/ui/BOARD/boardList.xml";
+			$w.url(x2xPath);
+		} else {
+			alert("삭제가 실패 되었습니다.");	
+		}
+	};
+	]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+    	<xf:group id="">
+    		<xf:group style="padding-right: 20px" id="">
+    			<w2:span style="position:static;top:197px;left:237px;width:610px;height:23px;" label="게시물 &amp;nbsp;본인 인증"
+    				id="span_title">
+    			</w2:span>
+    		</xf:group>
+    		<xf:group style="padding: 10px;" id="">
+    			<xf:group id="">
+    				<w2:span style="width:80px;" label="아이디" id=""></w2:span>
+    				<xf:input adjustMaxLength="false" style="position:static;top:143px;left:252px;width:149px;height:21px;" id="ipt_conid"
+    					ref="data:identiInfo.con_id">
+    				</xf:input>
+    			</xf:group>
+    			<w2:span style="width:80px;" label="패스워드" id=""></w2:span>
+    			<xf:input adjustMaxLength="false" style="width: 144px;height: 21px;" id="ipt_pwd" ref="data:identiInfo.password"></xf:input>
+    		</xf:group>
+    		<xf:trigger style="width: 80px;height: 23px;" id="edit_btn" type="button" ev:onclick="scwin.edit_btn_onclick">
+    			<xf:label><![CDATA[인증]]></xf:label>
+    		</xf:trigger>
+    		<xf:trigger ev:onclick="scwin.delete_btn_onclick" style="position:static; top:142px; left:124px; width:80px; height:23px; "
+    			id="delete_btn" type="button">
+    			<xf:label><![CDATA[인증]]></xf:label>
+    		</xf:trigger>
+    	</xf:group>
+    	<xf:group id=""></xf:group></body>
+</html>

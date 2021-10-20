@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    <head>
+    	<w2:type>DEFAULT</w2:type>
+        <w2:buildDate/>
+        <xf:model>
+        	<xf:instance>
+        		<data xmlns="" />
+        	</xf:instance>
+        	<w2:dataCollection baseNode="map">
+        		<w2:dataMap baseNode="map" id="writeData_Rq">
+        			<w2:keyInfo>
+        				<w2:key id="con_title" name="제목" dataType="text"></w2:key>
+        				<w2:key id="con_txt" name="내용" dataType="text"></w2:key>
+        				<w2:key id="con_id" name="작성자ID" dataType="text"></w2:key>
+        				<w2:key id="password" name="패스워드" dataType="text"></w2:key>
+        				<w2:key id="con_no" name="수정전용번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="resultData_Rp">
+        			<w2:keyInfo>
+        				<w2:key id="result" name="결과" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="searchData_Rp">
+        			<w2:keyInfo>
+        				<w2:key id="CON_TITLE" name="제목" dataType="text"></w2:key>
+        				<w2:key id="CON_TXT" name="내용" dataType="text"></w2:key>
+        				<w2:key id="CON_NO" name="게시글번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="search_con_no_Rq">
+        			<w2:keyInfo>
+        				<w2:key id="con_no" name="게시물번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="editData_Rq">
+        			<w2:keyInfo>
+        				<w2:key id="con_title" name="제목" dataType="text"></w2:key>
+        				<w2:key id="con_txt" name="내용" dataType="text"></w2:key>
+        				<w2:key id="con_no" name="게시물번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        	</w2:dataCollection>
+        	<w2:workflowCollection></w2:workflowCollection>
+        	<xf:submission id="write" ref='data:json,{"id":"writeData_Rq","key":"contentData"}' target='data:json,{"id":"resultData_Rp","key":"resultData"}' action="/reference/write.do" method="post"
+        		mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+        		processMsg="글쓰는중..." ev:submit="" ev:submitdone="scwin.write_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="search" ref='data:json,{"id":"search_con_no_Rq","key":"searchContent"}' target='data:json,{"id":"searchData_Rp","key":"contentDetail"}'
+        		action="/reference/detailContent.do" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+        		errorHandler="" customHandler="" mode="asynchronous" processMsg="글찾는중..." ev:submit="" ev:submitdone="scwin.search_submitdone"
+        		ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        	<xf:submission id="edit" ref='data:json,{"id":"editData_Rq","key":"contentData"}' target='data:json,{"id":"resultData_Rp","key":"resultData"}' action="/reference/edit.do" method="post" mediatype="application/json"
+        		encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="수정중..." ev:submit=""
+        		ev:submitdone="scwin.edit_submitdone" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        </xf:model>
+        <script type="text/javascript" lazy="false"><![CDATA[
+        
+	scwin.onpageload = function() {
+		// 글쓰기 0, 글수정 1 키값 구분 변수
+		var keyValue = $p.getParameter("keyValue");
+
+		if (keyValue == 0) {	// 글쓰기 화면
+			viewTitle.setValue("글쓰기 화면");
+			edit_btn.hide();
+		} 
+		else if (keyValue == 1){ // 수정  화면
+			viewTitle.setValue("게시물 수정 화면");
+			write_btn.hide();
+			identify_tb.hide();
+			var con_no = $p.getParameter("con_no");
+			search_con_no_Rq.set("con_no", con_no);
+			
+			$p.executeSubmission("search");
+		}
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	
+	scwin.backHistory_onclick = function(e) {
+		var x2xPath = "/ui/BOARD/boardList.xml";
+		$w.url(x2xPath);
+	};
+	
+	scwin.write_btn_onclick = function(e) {
+		$p.executeSubmission("write");
+	};
+	
+	scwin.write_submitdone = function(e) { // 글쓰기
+		if ( resultData_Rp.get("result") == 1) {
+			alert("작성이 왼료 되었습니다.");	
+			// 메인화면으로 전환
+			var x2xPath = "/ui/BOARD/boardList.xml";
+			$w.url(x2xPath);
+		} else {
+			alert("작성이 실패 되었습니다.");	
+		}
+	};
+	
+	scwin.edit_btn_onclick = function(e) { // 수정
+
+		editData_Rq.set("con_title", ipt_contitle.getValue());
+		editData_Rq.set("con_txt", ta_contxt.getValue());
+		editData_Rq.set("con_no", search_con_no_Rq.get("con_no"));
+		
+		$p.executeSubmission("edit");
+	};
+	
+
+	
+	scwin.search_submitdone = function(e) {
+		ipt_contitle.setValue(searchData_Rp.get("CON_TITLE"));
+		ta_contxt.setValue(searchData_Rp.get("CON_TXT"));
+	};
+	
+	scwin.edit_submitdone = function(e) {
+		if ( resultData_Rp.get("result") == 1) {
+			alert("수정이 왼료 되었습니다.");	
+			// 메인화면으로 전환
+			var x2xPath = "/ui/BOARD/boardList.xml";
+			$w.url(x2xPath);
+		} else {
+			alert("수정이 실패 되었습니다.");	
+		}
+	};
+	]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+    	
+    <xf:group id=""><xf:group id="">
+    		<xf:group style="padding-left:" id="">
+    			<xf:group id="">
+    				<xf:group id="">
+
+    					<xf:group id="">
+    						<xf:group id=""></xf:group>
+    					</xf:group>
+
+
+
+    					<xf:trigger ev:onclick="scwin.backHistory_onclick" style="width:74px;height:42px;" id="backHistory" type="button">
+    						<xf:label><![CDATA[뒤로]]></xf:label>
+    					</xf:trigger>
+    					<w2:span style="position:static;top:16px;left:195px;width:475px;height:36px;font-size:30px;padding-left:10px;" label="현재 화면 위치" id="viewTitle"></w2:span>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<xf:group style="" id="">
+    			<xf:group tagname="table" style="width:100%;" id="" class="w2tb">
+    				<w2:attributes>
+    					<w2:summary></w2:summary>
+    				</w2:attributes>
+    				<xf:group tagname="caption"></xf:group>
+    				<xf:group tagname="colgroup">
+    					<xf:group tagname="col" style="width:6.38%;"></xf:group>
+    					<xf:group tagname="col" style="width:100px;"></xf:group>
+    				</xf:group>
+    				<xf:group tagname="tr" style="">
+    					<xf:group tagname="th" style="" class="w2tb_th">
+    						제&amp;nbsp;목
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group tagname="td" style="" class="w2tb_td">
+    						<xf:input ref="data:writeData_Rq.con_title" adjustMaxLength="false" readOnly="false" style="width:300px;height:21px;border:2px;" id="ipt_contitle" class="">
+    						</xf:input>
+    					</xf:group>
+    				</xf:group>
+    				<xf:group tagname="tr" style="">
+    					<xf:group tagname="th" style="" class="w2tb_th">
+    						내&amp;nbsp;용
+    						<w2:attributes>
+    							<w2:scope>row</w2:scope>
+    						</w2:attributes>
+    					</xf:group>
+    					<xf:group adaptive="" tagname="td" style="" userData1="" class="w2tb_td">
+    						<xf:textarea ref="data:writeData_Rq.con_txt" readOnly="false" style="position:static; top:32px; left:89px; width:300px; height:100px; " id="ta_contxt" userData1="">
+    						</xf:textarea>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    			<xf:group style="float: center;" id=""></xf:group>
+    		</xf:group>
+
+
+    	</xf:group><xf:group id="">
+    		<xf:group tagname="table" style="width:100%;" id="identify_tb" class="w2tb">
+    			<w2:attributes>
+    				<w2:summary></w2:summary>
+    			</w2:attributes>
+    			<xf:group tagname="caption"></xf:group>
+    			<xf:group tagname="colgroup">
+    				<xf:group tagname="col" style="width:13.74%;"></xf:group>
+    				<xf:group tagname="col" style="width:-46.56%;"></xf:group>
+    			</xf:group>
+    			<xf:group tagname="tr">
+    				<xf:group id="">
+    					<xf:group tagname="td" style="" id="" class="w2tb_td">
+    						<xf:group id="">
+    							<w2:span style="" label="아이디" id=""></w2:span>
+    							<xf:input ref="data:writeData_Rq.con_id" adjustMaxLength="false" style="position:static; top:175px; left:207px; width:144px; height:21px; " id="ipt_conid">
+    							</xf:input>
+    						</xf:group>
+    					</xf:group>
+    					<xf:group tagname="td" style="" id="" class="w2tb_td">
+    						<w2:span style="position:static; top:293px; left:384px; width:100px; height:23px; " label="패스워드" id=""></w2:span>
+    						<xf:input ref="data:writeData_Rq.password" adjustMaxLength="false" style="position:static; top:170px; left:494px; width:144px; height:21px; " id="ipt_password">
+    						</xf:input>
+    					</xf:group>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    	</xf:group><xf:trigger ev:onclick="scwin.write_btn_onclick" style="position:static; top:202px; left:115px; width:80px; height:23px; " id="write_btn" type="button">
+    		<xf:label><![CDATA[글쓰기]]></xf:label>
+    	</xf:trigger><xf:trigger ev:onclick="scwin.edit_btn_onclick" style="position:static; top:278px; left:325px; width:80px; height:23px; " id="edit_btn" type="button">
+    		<xf:label><![CDATA[수정]]></xf:label>
+    	</xf:trigger></xf:group></body>
+</html>

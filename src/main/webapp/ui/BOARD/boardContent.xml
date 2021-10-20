@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+    
+    <head meta_screenName="게시물 상세보기">
+    	<w2:type>DEFAULT</w2:type>
+        <w2:buildDate/>
+        <xf:model>
+        	<xf:instance>
+        		<data xmlns="" />
+        	</xf:instance>
+        	<w2:dataCollection baseNode="map">
+        		<w2:dataMap baseNode="map" id="contentDetail">
+        			<w2:keyInfo>
+        				<w2:key id="CON_TITLE" name="제목" dataType="text"></w2:key>
+        				<w2:key id="CON_TXT" name="내용" dataType="text"></w2:key>
+        				<w2:key id="CON_NO" name="게시글번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="searchContent">
+        			<w2:keyInfo>
+        				<w2:key id="con_no" name="게시물번호" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
+        	</w2:dataCollection>
+        	<w2:workflowCollection></w2:workflowCollection>
+        	<xf:submission id="searchContentDetail" ref="data:json,searchContent" target="data:json,contentDetail" action="/reference/detailContent.do"
+        		method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
+        		mode="asynchronous" processMsg="불러오는중..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+        	</xf:submission>
+        </xf:model>
+        <script type="text/javascript" lazy="false"><![CDATA[
+        
+	scwin.onpageload = function() {
+		requires("uiplugin.popup");
+		
+		// 클릭된 게시물 번호 Json(DataCollection) 저장
+		var params = $p.getParameter("CON_NO");
+		searchContent.set("con_no", params);
+		$p.executeSubmission("searchContentDetail")
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	scwin.backHistory_onclick = function(e) { // 뒤로가기
+		var x2xPath = "/ui/BOARD/boardList.xml";
+		$w.url(x2xPath);
+	};
+	
+	scwin.edit_btn_onclick = function(e) {
+		// 수정 버튼 클릭시 인증화면으로 넘기기
+		var x2xPath = "/ui/BOARD/identification.xml";
+
+		var dataObject = { // 수정키값과 해당 게시물 고유번호 데이터 넘기기위해 JSON형태로 저장
+			"type" : "json",
+			"name" : "popupParam",
+			"data" : {"keyValue" : 1, "con_no" : searchContent.get("con_no")}
+		};
+		
+		var options = {
+		    id : "popup1",
+		    type : "window",
+		    width : "300px",
+		    height : "300px",
+		    top : "100px",
+		    left : "600px",
+		    popupName : "본인인증",
+		    modal : true,
+		    useIFrame : true,
+		    scrollbars : "true",
+		    resizable : "true",
+		    frameMode : "wframe",
+		    menubar : true,
+		    parentPopupDisabled : "true",
+		    dataObject : dataObject
+		};
+
+		$w.openPopup(x2xPath, options);
+	};
+	
+	scwin.delete_btn_onclick = function(e) {
+		// 삭제 버튼 클릭시 인증화면으로 넘기기
+		var x2xPath = "/ui/BOARD/identification.xml";
+		
+		var dataObject = { // 삭제키값과 해당 게시물 고유번호 데이터 넘기기위해 JSON형태로 저장
+			"type" : "json",
+			"name" : "popupParam",
+			"data" : {"keyValue" : 2, "con_no" : searchContent.get("con_no")}
+		};
+		var options = {
+		    id : "popup1",
+		    type : "window",
+		    width : "300px",
+		    height : "300px",
+		    top : "100px",
+		    left : "600px",
+		    popupName : "본인인증",
+		    modal : true,
+		    useIFrame : true,
+		    scrollbars : "true",
+		    resizable : "true",
+		    frameMode : "wframe",
+		    menubar : true,
+		    parentPopupDisabled : "true",
+		    dataObject : dataObject
+		};
+
+		$w.openPopup(x2xPath, options);
+	};
+	]]></script>
+    </head>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+    	<xf:group id="" style="padding-left:">
+    		<xf:group id="">
+    			<xf:group id="">
+
+    				<xf:group id="">
+    					<xf:group id="">
+
+    					</xf:group>
+    				</xf:group>
+
+    				<xf:trigger ev:onclick="scwin.backHistory_onclick" style="width: 80px;height: 23px;" id="backHistory" type="button">
+    					<xf:label><![CDATA[뒤로]]></xf:label>
+    				</xf:trigger>
+    				<w2:span label="게시물 상세보기" style="position:static;top:8px;left:140px;width:967px;height:23px;font-size:30px;padding-left:10px;" id=""></w2:span>
+    			</xf:group>
+
+    		</xf:group>
+
+    	</xf:group>
+    	<xf:group id="">
+    		<xf:group tagname="table" style="width:100%;" id="" class="w2tb">
+    			<w2:attributes>
+    				<w2:summary></w2:summary>
+    			</w2:attributes>
+    			<xf:group tagname="caption"></xf:group>
+    			<xf:group tagname="colgroup">
+    				<xf:group tagname="col" style="width:6.38%;"></xf:group>
+    				<xf:group tagname="col" style="width:100px;"></xf:group>
+    			</xf:group>
+    			<xf:group tagname="tr" style="">
+    				<xf:group tagname="th" style="" class="w2tb_th">
+    					제&amp;nbsp;목
+    					<w2:attributes>
+    						<w2:scope>row</w2:scope>
+    					</w2:attributes>
+    				</xf:group>
+    				<xf:group tagname="td" style="" class="w2tb_td">
+    					<xf:input ref="data:contentDetail.CON_TITLE" adjustMaxLength="false" style="width:300px;height:21px;border:2px;"
+    						readOnly="true" id="ipt_contitle" class="">
+    					</xf:input>
+    				</xf:group>
+    			</xf:group>
+    			<xf:group tagname="tr" style="">
+    				<xf:group tagname="th" style="" class="w2tb_th">
+    					내&amp;nbsp;용
+    					<w2:attributes>
+    						<w2:scope>row</w2:scope>
+    					</w2:attributes>
+    				</xf:group>
+    				<xf:group tagname="td" style="" class="w2tb_td">
+    					<xf:textarea ref="data:contentDetail.CON_TXT"
+    						style="position:static; top:32px; left:89px; width:300px; height:100px; " readOnly="true" id="ta_contxt">
+    					</xf:textarea>
+    				</xf:group>
+    			</xf:group>
+    		</xf:group>
+    		<xf:group id="" style="float: center;">
+    			<xf:trigger ev:onclick="scwin.edit_btn_onclick" style="width: 80px;height: 23px;" id="edit_btn" type="button">
+    				<xf:label><![CDATA[수정]]></xf:label>
+    			</xf:trigger>
+    			<xf:trigger ev:onclick="scwin.delete_btn_onclick" style="width: 80px;height: 23px;" id="delete_btn" type="button">
+    				<xf:label><![CDATA[삭제]]></xf:label>
+    			</xf:trigger>
+    		</xf:group>
+    	</xf:group>
+    	
+    </body>
+</html>
