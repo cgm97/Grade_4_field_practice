@@ -124,9 +124,12 @@
 	scwin.edit_submitdone = function(e) {
 		if ( resultData_Rp.get("result") == 1) {
 			alert("수정이 왼료 되었습니다.");	
-			// 메인화면으로 전환
-			var x2xPath = "/ui/BOARD/boardList.xml";
-			$w.url(x2xPath);
+			// 수정 후 상세 화면으로 전환
+			var x2xPath = "/ui/BOARD/boardContent.xml";
+			var options = 	{
+				"CON_NO" : search_con_no_Rq.get("con_no")
+			};
+			$w.url(x2xPath, { "spa" : true, "param" : options });
 		} else {
 			alert("수정이 실패 되었습니다.");	
 		}
